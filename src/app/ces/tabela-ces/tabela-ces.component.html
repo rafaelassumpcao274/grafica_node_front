@@ -1,0 +1,16 @@
+<table class="table table-responsive-sm" *ngIf="listaOrdemServicos">
+    <thead>
+        <tr>
+            <th scope="col">Nº Pedido</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Material</th>
+            <th scope="col">Data</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let element of listaOrdemServicos.listaOrdemServico">
+            <tr >
+                <td>{{element.id}}</td>
+                <td>{{element?.empresa?.nome_empresa}}</td>                
+            </tr>
+    </tbody>
+</table>

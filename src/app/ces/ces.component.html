@@ -1,0 +1,18 @@
+<div class="container">
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" *ngFor="let element of meses" (click)="mesEscolhido(element)" >{{element}}</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" *ngIf="mes > 0">
+    <app-tabela-ces [mesEscolhido]=mes>
+    </app-tabela-ces>
+</div>

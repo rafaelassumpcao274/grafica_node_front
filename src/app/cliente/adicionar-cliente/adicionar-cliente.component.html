@@ -1,0 +1,160 @@
+<app-loading [loading]="loading"></app-loading>
+<div class="container">
+  <mat-card class="mat-elevation-z8">
+    <form [formGroup]="formCliente" (ngSubmit)="onSubmit()">
+      <mat-card-title class="card-title"> Cadastro de cliente </mat-card-title>
+
+      <mat-card-content>
+        <br />
+        <div class="row">
+          <mat-form-field class="col-md-4" appearance="fill">
+            <mat-label>Nome Empresa</mat-label>
+            <input
+              matInput
+              type="text"
+              name="nome_empresa"
+              id="nome_empresa"
+              formControlName="nome_empresa"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="col-md-4" appearance="fill">
+            <mat-label>Razão Social</mat-label>
+            <input
+              matInput
+              type="text"
+              name="razao_social"
+              id="razao_social"
+              formControlName="razao_social"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="col-md-4" appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input
+              matInput
+              type="text"
+              name="email"
+              id="email"
+              formControlName="email"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-md-3" appearance="fill">
+            <mat-label>Cnpj</mat-label>
+            <input
+              matInput
+              type="text"
+              [maxLength]="14"
+              name="cnpj"
+              id="cnpj"
+              formControlName="cnpj"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-md-4" appearance="fill">
+            <mat-label>Contato</mat-label>
+            <input
+              matInput
+              type="text"
+              name="contato"
+              id="contato"
+              formControlName="contato"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="col-md-4" appearance="fill">
+            <mat-label>Telefone</mat-label>
+            <input
+              matInput
+              type="tel"
+              maxlength="14"
+              name="telefone"
+              id="telefone"
+              formControlName="telefone"
+              placeholder="(41)55555-1234"
+              pattern="([0-9]{2}) [0-9]{5}-[0-9]{4}"
+            />
+          </mat-form-field>
+        </div>
+
+        <div formGroupName="endereco">
+          <div class="row">
+            <mat-form-field class="col-md-4" appearance="fill">
+              <mat-label>Endereco</mat-label>
+              <input
+                matInput
+                type="text"
+                name="descricao_endereco"
+                id="descricao_endereco"
+                formControlName="descricao_endereco"
+              />
+            </mat-form-field>
+            <mat-form-field class="col-md-4" appearance="fill">
+              <mat-label>Cep</mat-label>
+              <input
+                matInput
+                type="number"
+                name="cep"
+                id="cep"
+                maxlength="8"
+                formControlName="cep"
+              />
+            </mat-form-field>
+
+            <span class="col-md-4" formGroupName="bairro">
+
+                <mat-form-field appearance="fill">
+                  <mat-label>Bairro</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    name="descricao_bairro"
+                    id="descricao_bairro"
+                    formControlName="descricao_bairro"
+                  />
+                </mat-form-field>
+
+
+                <span class="col-md-4" formGroupName="cidade">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Cidade</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      name="descricao_cidade"
+                      id="descricao_cidade"
+                      formControlName="descricao_cidade"
+                    />
+                  </mat-form-field>
+                  <span formGroupName="uf">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Uf</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        name="descricao_uf"
+                        id="descricao_uf"
+                        formControlName="descricao_uf"
+                      />
+                    </mat-form-field>
+                  </span>
+                </span>
+
+
+            </span>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <input type="submit" class="btn btn-primary mt-4" value="Salvar" />
+        <a href="#" class="btn btn-secondary mt-4 ml-2">Cancelar</a>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
