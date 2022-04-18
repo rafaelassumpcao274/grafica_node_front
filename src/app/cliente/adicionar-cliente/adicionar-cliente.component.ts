@@ -25,7 +25,7 @@ export class AdicionarClienteComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: ClientesService
+    private service: ClienteService
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +64,11 @@ export class AdicionarClienteComponent implements OnInit {
     cliente.telefone = 0;
     console.info(cliente);
     this.loading = true;
-    this.service.salvar(cliente).subscribe();
+    this.service.salvar(cliente).subscribe((info) =>{
+        console.info(info);
+        this.loading = false;
+    });
+    this.loading = false;
     // Usar o método reset para limpar os controles na tela
     //this.formCliente.reset(new Cliente());
   }

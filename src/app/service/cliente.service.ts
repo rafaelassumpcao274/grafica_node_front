@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { Cliente } from 'src/models/cliente';
 import { ListaOrdemDeServico } from 'src/models/listaOrdemServico';
+import { Paginator } from 'src/models/Paginator';
 import { BaseClass } from './base.service';
 
 @Injectable({
@@ -20,22 +21,19 @@ export class ClienteService extends BaseClass {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  listarTodosProdutos() {
-    this.httpClient.get<Cliente>(`${this.API_URL}/`)
-      .subscribe(resultado => console.log(resultado));
+  listarEmpresas(obj?:Paginator) {
+
+    return this.httpClient.post<Paginator>(this.API_URL+'/lista_empresa',obj,this.httpOptions)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+    )
   }
 
-  listarClientePorId(id: number): Observable<Cliente> {
-    return this.httpClient.get<Cliente>(this.API_URL + '/' + id, this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
   // alterar rota para post clientes padrao
   salvar(cliente: Cliente): Observable<Cliente> {
 
-    return this.httpClient.post<Cliente>(this.API_URL+'/empresa/criar',cliente,this.httpOptions)
+    return this.httpClient.post<Cliente>(this.API_URL+'/empresa',cliente,this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

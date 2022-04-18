@@ -1,8 +1,12 @@
+import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import { Cliente } from 'src/models/cliente';
+import { Paginator } from 'src/models/Paginator';
+import { ClienteService } from '../service/cliente.service';
 
 export interface PeriodicElement {
   name: string;
@@ -32,13 +36,41 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./cliente.component.scss']
 })
 export class ClienteComponent implements OnInit {
+  loading = false;
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  listaEmpresas:Cliente[] = []
+  dataSource = ELEMENT_DATA;
+  teste :MatPaginator | undefined;
 
-  constructor() { }
+   pagina:Paginator = new Paginator();
+  constructor(private service: ClienteService) { }
 
   ngOnInit(): void {
+
+    this.listar()
   }
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+
+  listar(event?:any){
+
+    if(event){
+      this.pagina.currentPage = event.pageIndex
+      this.pagina.lista = this.listaEmpresas
+      this.pagina.totalItems = event.length
+      this.pagina.totalPages = event.pageSize
+    }else{
+      this.pagina.currentPage = 0
+    }
+
+
+    this.loading = true
+    this.service.listarEmpresas(this.pagina).subscribe((obj) =>{
+      this.listaEmpresas = obj.lista as Cliente[];
+      this.pagina = obj;
+      this.loading = false;
+    })
+  }
+
+
 
 }
 
