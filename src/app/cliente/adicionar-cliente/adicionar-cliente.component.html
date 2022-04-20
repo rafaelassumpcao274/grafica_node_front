@@ -82,6 +82,7 @@
           </mat-form-field>
         </div>
 
+
         <div formGroupName="endereco">
           <div class="row">
             <mat-form-field class="col-md-4" appearance="fill">
@@ -105,8 +106,8 @@
                 formControlName="cep"
               />
             </mat-form-field>
-
-            <span class="col-md-4" formGroupName="bairro">
+          </div>
+            <div class="row" formGroupName="bairro">
 
                 <mat-form-field appearance="fill">
                   <mat-label>Bairro</mat-label>
@@ -120,8 +121,8 @@
                 </mat-form-field>
 
 
-                <span class="col-md-4" formGroupName="cidade">
-                  <mat-form-field appearance="fill">
+                <span  formGroupName="cidade">
+                  <mat-form-field class="col-md-4" appearance="fill">
                     <mat-label>Cidade</mat-label>
                     <input
                       matInput
@@ -131,7 +132,7 @@
                       formControlName="descricao_cidade"
                     />
                   </mat-form-field>
-                  <span formGroupName="uf">
+                  <div class="col-md-4" formGroupName="uf">
                     <mat-form-field appearance="fill">
                       <mat-label>Uf</mat-label>
                       <input
@@ -142,12 +143,11 @@
                         formControlName="descricao_uf"
                       />
                     </mat-form-field>
-                  </span>
+                  </div>
                 </span>
 
 
-            </span>
-          </div>
+              </div>
         </div>
       </mat-card-content>
 

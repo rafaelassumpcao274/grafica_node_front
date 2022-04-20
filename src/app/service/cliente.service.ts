@@ -25,7 +25,7 @@ export class ClienteService extends BaseClass {
 
     return this.httpClient.post<Paginator>(this.API_URL+'/lista_empresa',obj,this.httpOptions)
     .pipe(
-      retry(2),
+      retry(0),
       catchError(this.handleError)
     )
   }

@@ -1,6 +1,7 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatSort} from '@angular/material/sort';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
@@ -43,7 +44,8 @@ export class ClienteComponent implements OnInit {
   teste :MatPaginator | undefined;
 
    pagina:Paginator = new Paginator();
-  constructor(private service: ClienteService) { }
+  constructor(private service: ClienteService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -67,6 +69,9 @@ export class ClienteComponent implements OnInit {
       this.listaEmpresas = obj.lista as Cliente[];
       this.pagina = obj;
       this.loading = false;
+    }, (error) =>{
+      this.loading = false;
+      this.snackBar.open(error, "x")
     })
   }
 

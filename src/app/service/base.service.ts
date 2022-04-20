@@ -12,9 +12,11 @@ export class BaseClass{
       errorMessage = error.error.message;
     } else {
       // Erro ocorreu no lado do servidor
-      errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
+      errorMessage = error.error ?? error.message;
+      // errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
     }
-    // console.log(errorMessage);
+
+     console.error(errorMessage);
     return throwError(errorMessage);
   };
 
