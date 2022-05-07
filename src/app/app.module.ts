@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -19,6 +20,9 @@ import { AdicionarClienteComponent } from './cliente/adicionar-cliente/adicionar
 import { ReactiveFormsModule } from '@angular/forms';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { LoadingComponent } from './core/loading/loading.component';
+import { SnackBars } from './util/snack-bars';
+import { OrdemServicoComponent } from './ordem-servico/ordem-servico.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -33,6 +37,8 @@ import { LoadingComponent } from './core/loading/loading.component';
     ClienteComponent,
     AdicionarClienteComponent,
     LoadingComponent,
+    OrdemServicoComponent,
+
   ],
   imports: [
 
@@ -42,6 +48,7 @@ import { LoadingComponent } from './core/loading/loading.component';
     BrowserAnimationsModule,
     MatNativeDateModule,
     MaterialExampleModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [],

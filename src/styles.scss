@@ -17,3 +17,32 @@ body {
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
 }
+
+
+.orange-snackbar {
+  background: rgb(238, 169, 78);
+  color: white;
+}
+.orange-snackbar button {
+  background-color: rgba(247, 171, 73, 0.966);
+  color: white;
+  border: none;
+}
+.green-snackbar {
+  background: rgb(65, 252, 134);
+  color: white;
+}
+.green-snackbar button {
+  background-color: rgb(65, 252, 134);
+  color: white;
+  border: none;
+}
+.red-snackbar {
+  background: #F44336 !important;
+  color: white!important;
+}
+.red-snackbar button {
+  background-color: #F44336;
+  color: white !important;
+  border: none !important;
+}

@@ -1,7 +1,8 @@
 <app-loading [loading]="loading"></app-loading>
 <div class="container">
   <mat-card class="mat-elevation-z8">
-    <form [formGroup]="formCliente" (ngSubmit)="onSubmit()">
+
+     <form [formGroup]="formCliente" (ngSubmit)="onSubmit()">
       <mat-card-title class="card-title"> Cadastro de cliente </mat-card-title>
 
       <mat-card-content>
@@ -14,7 +15,7 @@
               type="text"
               name="nome_empresa"
               id="nome_empresa"
-              formControlName="nome_empresa"
+              [(ngModel)]="cliente.nome_empresa"
             />
           </mat-form-field>
 
@@ -155,6 +156,6 @@
         <input type="submit" class="btn btn-primary mt-4" value="Salvar" />
         <a href="#" class="btn btn-secondary mt-4 ml-2">Cancelar</a>
       </mat-card-actions>
-    </form>
+    </form> -->
   </mat-card>
 </div>

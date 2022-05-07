@@ -2,31 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormArray } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClienteService } from 'src/app/service/cliente.service';
-import { ClientesService } from 'src/app/service/clientes.service';
+import { SnackBars } from 'src/app/util/snack-bars';
 import { Cliente } from 'src/models/cliente';
-import { Endereco } from 'src/models/endereco';
-import { ClienteComponent } from '../cliente.component';
 
 @Component({
   selector: 'app-adicionar-cliente',
   templateUrl: './adicionar-cliente.component.html',
   styleUrls: ['./adicionar-cliente.component.scss'],
 })
+
 export class AdicionarClienteComponent implements OnInit {
   loading = false;
 
   formCliente!: FormGroup;
 
   testeCliente!: FormGroup;
+  cliente:Cliente = new Cliente();
 
   fb!: FormBuilder;
   temCpf = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private service: ClienteService
+    private service: ClienteService,
+    private snackBar:MatSnackBar
   ) {}
+
+    info:SnackBars = new SnackBars(this.snackBar);
 
   ngOnInit(): void {
     this.formCliente = Cliente.formCliente();
@@ -64,11 +68,15 @@ export class AdicionarClienteComponent implements OnInit {
     cliente.telefone = 0;
     console.info(cliente);
     this.loading = true;
-    this.service.salvar(cliente).subscribe((info) =>{
-        console.info(info);
+    this.service.salvar(cliente).subscribe((msg) =>{
+      this.info.showSuccess("Salvo com sucesso !! ");
+        console.info(msg);
         this.loading = false;
+    },(error)=>{
+      this.loading = false;
+      this.info.showMessageError(error)
     });
-    this.loading = false;
+
     // Usar o método reset para limpar os controles na tela
     //this.formCliente.reset(new Cliente());
   }

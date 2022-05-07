@@ -1,18 +1,14 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError, Observable, retry, throwError } from 'rxjs';
-import { Cliente } from 'src/models/cliente';
-import { ListaOrdemDeServico } from 'src/models/listaOrdemServico';
+import { catchError, Observable, retry } from 'rxjs';
+import { OrdemDeServico } from 'src/models/ordem-de-servico';
 import { Paginator } from 'src/models/Paginator';
 import { BaseClass } from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClienteService extends BaseClass {
-
-
+export class OrdemServicoService extends BaseClass{
   constructor(private httpClient: HttpClient,
     ) {
     super();
@@ -33,13 +29,12 @@ export class ClienteService extends BaseClass {
   }
 
   // alterar rota para post clientes padrao
-  salvar(cliente: Cliente): Observable<Cliente> {
+  salvar(ordemServico: OrdemDeServico): Observable<OrdemDeServico> {
 
-    return this.httpClient.post<Cliente>(this.API_URL+'/empresa',cliente,this.httpOptions)
+    return this.httpClient.post<OrdemDeServico>(this.API_URL+'/empresa',ordemServico,this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
   }
-
 }
