@@ -17,7 +17,7 @@ import { SnackBars } from '../util/snack-bars';
 })
 export class ClienteComponent implements OnInit {
   loading = false;
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['position', 'name', 'dataCadastro', 'editar'];
   listaEmpresas:Cliente[] = []
   teste :MatPaginator | undefined;
 
@@ -44,7 +44,7 @@ export class ClienteComponent implements OnInit {
 
 
     this.loading = true
-    this.service.listarEmpresas(this.pagina).subscribe((obj) =>{
+    this.service.listarPaginado(this.pagina).subscribe((obj) =>{
       this.listaEmpresas = obj.lista as Cliente[];
       this.pagina = obj;
       this.loading = false;

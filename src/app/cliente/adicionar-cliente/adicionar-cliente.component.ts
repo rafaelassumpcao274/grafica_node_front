@@ -3,9 +3,14 @@ import { FormBuilder } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { ClienteService } from 'src/app/service/cliente.service';
 import { SnackBars } from 'src/app/util/snack-bars';
+import { Bairro } from 'src/models/bairro';
+import { Cidade } from 'src/models/cidade';
 import { Cliente } from 'src/models/cliente';
+import { Endereco } from 'src/models/endereco';
+import { Uf } from 'src/models/uf';
 
 @Component({
   selector: 'app-adicionar-cliente',
@@ -16,10 +21,18 @@ import { Cliente } from 'src/models/cliente';
 export class AdicionarClienteComponent implements OnInit {
   loading = false;
 
+
   formCliente!: FormGroup;
+  formEmpresa!:FormGroup;
+  formEndereco!:FormGroup;
+  formBairro!:FormGroup;
+  formCidade!:FormGroup;
+  formUf!:FormGroup;
 
   testeCliente!: FormGroup;
   cliente:Cliente = new Cliente();
+
+  id?: number;
 
   fb!: FormBuilder;
   temCpf = false;
@@ -27,47 +40,77 @@ export class AdicionarClienteComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private service: ClienteService,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+    private route: ActivatedRoute,
   ) {}
 
     info:SnackBars = new SnackBars(this.snackBar);
 
   ngOnInit(): void {
+
+    this.route.params.subscribe(params => {
+      console.info(params);
+      this.id = params['id'];
+      if(this.id && this.id>0){
+
+        this.service.obterPorId(this.id).subscribe((msg) =>{
+            this.createForm(msg as Cliente)
+            this.loading = false;
+        },(error)=>{
+          this.loading = false;
+          this.info.showMessageError(error)
+        });
+
+      }
+    });
+
     this.formCliente = Cliente.formCliente();
+    this.formEndereco = Endereco.formEndereco();
+    this.formBairro = Bairro.formBairro();
+    this.formCidade = Cidade.formCidade();
+    this.formUf = Uf.formUf();
 
     /* this.createForm(new Cliente()); */
   }
 
-  /*   createForm(cliente:Cliente) {
+     createForm(cliente:Cliente) {
+        this.formCliente.patchValue(cliente)
+        this.formEndereco.patchValue(cliente.endereco as Endereco);
+        this.formBairro.patchValue(cliente.endereco?.bairro as Bairro);
+        this.formCidade.patchValue(cliente.endereco?.bairro?.cidade as Cidade);
+        this.formUf.patchValue(cliente.endereco?.bairro?.cidade?.uf as Uf);
 
-      this.formCliente = this.formBuilder.group({
-        nome_empresa: [cliente.nome_empresa],
-        razao_social:[cliente.razao_social],
-        cnpj:[cliente.cnpj],
-        email:[cliente.email],
-        temCpf: [this.temCpf],
-        contato:[cliente.contato],
-        telefone:[cliente.telefone],
-        aliases: this.fb.array([
-          this.fb.control('')
-        ])
-      })
-    }
-    get aliases() {
-      return this.formCliente.get('aliases') as FormArray;
     }
 
-    addAlias() {
-      this.aliases.push(this.fb.control(''));
-    }
+  obterCliente(): Cliente{
+    let cliente = this.formCliente.value as Cliente;
+    let endereco = this.formEndereco.value as Endereco;
+    let bairro = this.formBairro.value as Bairro;
+    let cidade = this.formCidade.value as Cidade;
+    let uf = this.formUf.value as Uf;
 
-   */
+    cidade.uf = uf;
+    bairro.cidade = cidade;
+    endereco.bairro = bairro;
+    cliente.endereco = endereco;
+
+    return cliente;
+  }
+
+
+  excluir(){
+    
+
+  }
+
   onSubmit() {
     // aqui você pode implementar a logica para fazer seu formulário salvar
-    let cliente = this.formCliente.value as Cliente;
+
+    let cliente:Cliente = this.obterCliente();
+
     cliente.telefone = 0;
-    console.info(cliente);
     this.loading = true;
+
     this.service.salvar(cliente).subscribe((msg) =>{
       this.info.showSuccess("Salvo com sucesso !! ");
         console.info(msg);

@@ -5,12 +5,19 @@ import { AdicionarClienteComponent } from './cliente/adicionar-cliente/adicionar
 import { ClienteComponent } from './cliente/cliente.component';
 import { HomeComponent } from './home/home.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { AdicionarOrdemServicoComponent } from './ordem-servico/adicionar-ordem-servico/adicionar-ordem-servico.component';
+import { OrdemServicoComponent } from './ordem-servico/ordem-servico.component';
+import { RegistroComponent } from './registro/registro.component';
 
 const routes: Routes = [
     { 'path':'', component:HomeComponent},
     { 'path':'ces', component:CesComponent},
-    { 'path':'cliente', component:ClienteComponent},
-    { 'path':'cliente/adicionar-cliente', component:AdicionarClienteComponent}
+    { 'path':'clientes', component:ClienteComponent},
+    { 'path':'cliente', component:AdicionarClienteComponent},
+    { 'path':'cliente/:id', component:AdicionarClienteComponent},
+    { 'path':'ordem-servico', component:AdicionarOrdemServicoComponent},
+    { 'path':'ordens-servicos', component:OrdemServicoComponent},
+    { 'path':'registro', component:RegistroComponent}
 
 ];
 

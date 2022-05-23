@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry } from 'rxjs';
-import { OrdemDeServico } from 'src/models/ordem-de-servico';
 import { Paginator } from 'src/models/Paginator';
 import { BaseClass } from './base.service';
 

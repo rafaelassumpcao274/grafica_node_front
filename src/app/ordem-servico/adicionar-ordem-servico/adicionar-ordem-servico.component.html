@@ -1,0 +1,314 @@
+<mat-card>
+  <div class="container-fluid">
+    <form action="/add_ordem_servico" method="post">
+      <nav class="navbar navbar-light bg-light">
+        <div class="col">
+          <h6>Data pedido</h6>
+          <p></p>
+        </div>
+        <!-- <div class="col"><img class="rounded " src="imagens/logo.jpg" height="70" width="150"></div> -->
+      </nav>
+      <div class="shadow p-3 mb-5 bg-white rounded">
+        <!-- <div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text">Cliente</span>
+				</div>
+				<input type="text" aria-label="Cliente" class="form-control" name="Cliente" id="Cliente"
+					 list="Clientes" required>
+				<datalist id="Clientes">
+					<% for(var i=0;i< list['Cliente'].length;i++){%>
+						<option>
+							<%= list['Cliente'][i].nome_empresa%>
+						</option>
+						<%}%>
+				</datalist>
+			</div> -->
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Material</span>
+          </div>
+          <input
+            type="text"
+            aria-label="Material"
+            class="form-control"
+            name="Material"
+            id="Material"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="shadow p-3 mb-5 bg-white rounded">
+        <div
+          class="shadow-sm p-3 mb-5 rounded"
+
+        >
+          <h6 class="text-center">Cor:</h6>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="cor_frente">Frente</label>
+          </div>
+          <select class="custom-select" name="cor_frente" id="cor_frente">
+            <option value="blank" selected>...</option>
+            <option value="4cores">4 Cores</option>
+            <option value="preto">Preto</option>
+            <option value="ciano">Ciano</option>
+            <option value="mageta">Magenta</option>
+            <option value="amarelo">Amarelo</option>
+            <option value="conf_modelo">Conforme o modelo</option>
+          </select>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="cor_verso">Verso</label>
+          </div>
+          <select class="custom-select" name="cor_verso" id="cor_verso">
+            <option value="blank" selected>...</option>
+            <option value="4cores">4 Cores</option>
+            <option value="preto">Preto</option>
+            <option value="ciano">Ciano</option>
+            <option value="mageta">Magenta</option>
+            <option value="amarelo">Amarelo</option>
+            <option value="conf_modelo">Conforme o modelo</option>
+          </select>
+        </div>
+      </div>
+      <div class="shadow p-3 mb-5 bg-white rounded">
+        <div
+          class="shadow-sm p-3 mb-5 rounded"
+
+        >
+          <h5 class="text-center">Papel</h5>
+        </div>
+        <div class="input-group mb-3">
+          <!-- <div class="input-group-prepend">
+					<label class="input-group-text" for="formato">Formato</label>
+				</div>
+				<select class="custom-select" name="formato" id="formato">
+					<% for(var i=0;i< list['Formato'].length;i++){%>
+						<option value=<%=list['Formato'][i].id%>><%=list['Formato'][i].descricao_formato%>
+						</option>
+						<%}%>
+				</select> -->
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Quantidade de folhas:</span
+            >
+          </div>
+          <input
+            type="number"
+            class="form-control"
+            aria-label="Quantidade de folhas "
+            name="quant_folhas"
+            id="quant_folhas"
+            aria-describedby="inputGroup-sizing-default"
+          />
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="papel">Papel</label>
+          </div>
+          <!-- <select class="custom-select" name="papel" id="papel">
+					<% for(var i=0;i< list['Papel'].length;i++){%>
+						<option value=<%=list['Papel'][i].id%>><%=list['Papel'][i].descricao%>
+						</option>
+						<%}%>
+				</select> -->
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Obs:</span
+            >
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Observação"
+            aria-describedby="input_observacao"
+            name="obs"
+          />
+        </div>
+      </div>
+
+      <div class="shadow p-3 mb-5 bg-white rounded">
+        <div
+          class="shadow-sm p-3 mb-5 rounded"
+
+        >
+          <h5 class="text-center">Acabamentos</h5>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <input
+                type="checkbox"
+                aria-label="Checkbox for following text input"
+                id="numeracao"
+                name="numeracao"
+              />
+            </div>
+          </div>
+
+          <div class="input-group-prepend">
+            <span class="input-group-text">Numeração</span>
+          </div>
+          <input
+            type="number"
+            aria-label="num_ini"
+            class="form-control"
+            placeholder="Inicial"
+            name="num_ini"
+            id="num_ini"
+          />
+          <input
+            type="number"
+            aria-label="num_end"
+            class="form-control"
+            placeholder="Final"
+            name="num_end"
+            id="num_end"
+          />
+        </div>
+        <div class="row row-cols-2">
+          <div class="col">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Picote"
+                name="acabamento"
+                id="Picote"
+              />
+              <label class="form-check-label" for="Picote"> Picote </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Cola"
+                name="acabamento"
+                id="Cola"
+              />
+              <label class="form-check-label" for="Cola"> Cola </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Corte_vico"
+                name="acabamento"
+                id="Corte_vico"
+              />
+              <label class="form-check-label" for="Corte_vico">
+                Corte e vinco
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Meio_corte"
+                name="acabamento"
+                id="Meio_corte"
+              />
+              <label class="form-check-label" for="Meio_corte">
+                Meio corte
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Plastificacao_brilho"
+                name="acabamento"
+                id="Plastificacao_brilho"
+              />
+              <label class="form-check-label" for="Plastificacao_brilho">
+                Plastificação Brilho
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Plastificacao_fosca"
+                name="acabamento"
+                id="Plastificacao_fosca"
+              />
+              <label class="form-check-label" for="Plastificacao_fosca">
+                Plastificação Fosca
+              </label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Laminacao_fosca"
+                name="acabamento"
+                id="Laminacao_fosca"
+              />
+              <label class="form-check-label" for="Laminacao_fosca">
+                Laminação Fosca
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Verniz_UV_total"
+                name="acabamento"
+                id="Verniz_UV_total"
+              />
+              <label class="form-check-label" for="Verniz_UV_total">
+                Verniz UV Total
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Verniz_UV_local"
+                name="acabamento"
+                id="Verniz_UV_local"
+              />
+              <label class="form-check-label" for="Verniz_UV_local">
+                Verniz UV Localizado
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Dobra"
+                name="acabamento"
+                id="Dobra"
+              />
+              <label class="form-check-label" for="Dobra"> Dobra </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="Grampo"
+                name="acabamento"
+                id="Grampo"
+              />
+              <label class="form-check-label" for="Grampo"> Grampo </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-outline-primary">Concluir</button>
+    </form>
+  </div>
+</mat-card>

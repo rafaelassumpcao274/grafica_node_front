@@ -23,7 +23,17 @@ export class ClienteService extends BaseClass {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  listarEmpresas(obj?:Paginator) {
+  obterPorId(id:number) {
+
+    return this.httpClient.get<Paginator>(this.API_URL+'/empresa/'+id,this.httpOptions)
+    .pipe(
+      retry(0),
+      catchError(this.handleError)
+    )
+  }
+
+
+  listarPaginado(obj?:Paginator) {
 
     return this.httpClient.post<Paginator>(this.API_URL+'/lista_empresa',obj,this.httpOptions)
     .pipe(
@@ -36,6 +46,15 @@ export class ClienteService extends BaseClass {
   salvar(cliente: Cliente): Observable<Cliente> {
 
     return this.httpClient.post<Cliente>(this.API_URL+'/empresa',cliente,this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  excluir(id:number): Observable<any> {
+
+    return this.httpClient.delete<any>(this.API_URL+'/empresa/'+id,this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

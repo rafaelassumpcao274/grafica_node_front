@@ -23,6 +23,9 @@ import { LoadingComponent } from './core/loading/loading.component';
 import { SnackBars } from './util/snack-bars';
 import { OrdemServicoComponent } from './ordem-servico/ordem-servico.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { RegistroComponent } from './registro/registro.component';
+import { AdicionarOrdemServicoComponent } from './ordem-servico/adicionar-ordem-servico/adicionar-ordem-servico.component';
 
 
 
@@ -38,6 +41,10 @@ import { FormsModule } from '@angular/forms';
     AdicionarClienteComponent,
     LoadingComponent,
     OrdemServicoComponent,
+    LoginComponent,
+    RegistroComponent,
+    AdicionarOrdemServicoComponent,
+
 
   ],
   imports: [

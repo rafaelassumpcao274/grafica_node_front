@@ -8,8 +8,8 @@
   <div class="collapse navbar-collapse navbar-light " id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto  ">
       <li><a class="nav-link" href="/orcamento">Orçamento</a></li>
-      <li ><a class="nav-link"  href="/Ordem_servico">Ordem de Servico</a></li>
-      <li ><a class="nav-link"  href="/cliente">Clientes</a></li>
+      <li ><a class="nav-link"  href="/ordens-servicos">Ordem de Servico</a></li>
+      <li ><a class="nav-link"  href="/clientes">Clientes</a></li>
       <li ><a class="nav-link"  href="/ces">Ces</a></li>
       <li ><a class="nav-link"  href="/suprimentos"> Suprimentos</a></li>
       <li ><a class="nav-link" href="/distribuidoras">Distribuidoras</a></li>
@@ -17,31 +17,7 @@
     </ul>
     <ul class="navbar-nav  navbar-right  ">
       <li class="nav-item dropdown">
-        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login</a>
-        <div class="dropdown-menu dropdown-menu-right">
-          <form class="px-4 py-3">
-            <div class="form-group">
-            <label for="exampleDropdownFormtext">Login</label>
-            <input type="text" class="form-control" id="exampleDropdownFormtext" placeholder="Login">
-            </div>
-            <div class="form-group">
-            <label for="exampleDropdownFormPassword1">Senha</label>
-            <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
-            </div>
-            <div class="form-group">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-              <label class="form-check-label" for="dropdownCheck">
-              Remember me
-              </label>
-            </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
-          </form>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">New around here? Sign up</a>
-          <a class="dropdown-item" href="#">Forgot password?</a>
-          </div>
+        <app-login></app-login>
       </li>
     </ul>
   </div>
