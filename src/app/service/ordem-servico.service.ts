@@ -28,10 +28,17 @@ export class OrdemServicoService extends BaseClass{
     )
   }
 
-  // alterar rota para post clientes padrao
   salvar(ordemServico: OrdemDeServico): Observable<OrdemDeServico> {
 
-    return this.httpClient.post<OrdemDeServico>(this.API_URL+'/empresa',ordemServico,this.httpOptions)
+    return this.httpClient.post<OrdemDeServico>(this.API_URL+'/ordem-servico/',ordemServico,this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+  obterPorId(id:number): Observable<OrdemDeServico> {
+
+    return this.httpClient.get<OrdemDeServico>(this.API_URL+'/ordem-servico/'+id,this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

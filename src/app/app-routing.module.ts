@@ -15,7 +15,7 @@ const routes: Routes = [
     { 'path':'clientes', component:ClienteComponent},
     { 'path':'cliente', component:AdicionarClienteComponent},
     { 'path':'cliente/:id', component:AdicionarClienteComponent},
-    { 'path':'ordem-servico', component:AdicionarOrdemServicoComponent},
+    { 'path':'ordem-servico/:id', component:AdicionarOrdemServicoComponent},
     { 'path':'ordens-servicos', component:OrdemServicoComponent},
     { 'path':'registro', component:RegistroComponent}
 

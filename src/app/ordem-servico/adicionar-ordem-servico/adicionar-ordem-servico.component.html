@@ -1,28 +1,28 @@
 <mat-card>
   <div class="container-fluid">
-    <form action="/add_ordem_servico" method="post">
+    <form [formGroup]="form">
       <nav class="navbar navbar-light bg-light">
         <div class="col">
           <h6>Data pedido</h6>
-          <p></p>
+          <p>{{ this.form.get("createdAt")?.value | date: "dd/MM/YY" }}</p>
         </div>
         <!-- <div class="col"><img class="rounded " src="imagens/logo.jpg" height="70" width="150"></div> -->
       </nav>
       <div class="shadow p-3 mb-5 bg-white rounded">
-        <!-- <div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<span class="input-group-text">Cliente</span>
-				</div>
-				<input type="text" aria-label="Cliente" class="form-control" name="Cliente" id="Cliente"
-					 list="Clientes" required>
-				<datalist id="Clientes">
-					<% for(var i=0;i< list['Cliente'].length;i++){%>
-						<option>
-							<%= list['Cliente'][i].nome_empresa%>
-						</option>
-						<%}%>
-				</datalist>
-			</div> -->
+        <div class="input-group mb-3" formGroupName="cliente">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Cliente</span>
+          </div>
+          <input
+            type="text"
+            aria-label="Cliente"
+            class="form-control"
+            name="nome_empresa"
+            id="nome_empresa"
+            formControlName="nome_empresa"
+            required
+          />
+        </div>
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -32,6 +32,7 @@
             type="text"
             aria-label="Material"
             class="form-control"
+            formControlName="material"
             name="Material"
             id="Material"
             required
@@ -40,60 +41,55 @@
       </div>
 
       <div class="shadow p-3 mb-5 bg-white rounded">
-        <div
-          class="shadow-sm p-3 mb-5 rounded"
-
-        >
+        <div class="shadow-sm p-3 mb-5 rounded">
           <h6 class="text-center">Cor:</h6>
         </div>
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="cor_frente">Frente</label>
+            <span class="input-group-text">Frente</span>
           </div>
-          <select class="custom-select" name="cor_frente" id="cor_frente">
-            <option value="blank" selected>...</option>
-            <option value="4cores">4 Cores</option>
-            <option value="preto">Preto</option>
-            <option value="ciano">Ciano</option>
-            <option value="mageta">Magenta</option>
-            <option value="amarelo">Amarelo</option>
-            <option value="conf_modelo">Conforme o modelo</option>
-          </select>
+          <input
+            type="text"
+            aria-label="Material"
+            class="form-control"
+            formControlName="cor_frente"
+            name="cor_frente"
+            id="cor_frente"
+            required
+          />
         </div>
-
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="cor_verso">Verso</label>
+            <span class="input-group-text">Verso</span>
           </div>
-          <select class="custom-select" name="cor_verso" id="cor_verso">
-            <option value="blank" selected>...</option>
-            <option value="4cores">4 Cores</option>
-            <option value="preto">Preto</option>
-            <option value="ciano">Ciano</option>
-            <option value="mageta">Magenta</option>
-            <option value="amarelo">Amarelo</option>
-            <option value="conf_modelo">Conforme o modelo</option>
-          </select>
+          <input
+            type="text"
+            aria-label="Material"
+            class="form-control"
+            formControlName="cor_verso"
+            name="cor_verso"
+            id="cor_verso"
+            required
+          />
         </div>
       </div>
       <div class="shadow p-3 mb-5 bg-white rounded">
-        <div
-          class="shadow-sm p-3 mb-5 rounded"
-
-        >
+        <div class="shadow-sm p-3 mb-5 rounded">
           <h5 class="text-center">Papel</h5>
         </div>
-        <div class="input-group mb-3">
-          <!-- <div class="input-group-prepend">
-					<label class="input-group-text" for="formato">Formato</label>
-				</div>
-				<select class="custom-select" name="formato" id="formato">
-					<% for(var i=0;i< list['Formato'].length;i++){%>
-						<option value=<%=list['Formato'][i].id%>><%=list['Formato'][i].descricao_formato%>
-						</option>
-						<%}%>
-				</select> -->
+        <div class="input-group mb-3" formGroupName="formato">
+          <div class="input-group-prepend">
+            <label class="input-group-text">Formato</label>
+          </div>
+          <input
+            type="text"
+            aria-label="descricao_formato"
+            name="descricao_formato"
+            id="descricao_formato"
+            formControlName="descricao_formato"
+            class="form-control"
+          />
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -105,22 +101,18 @@
             type="number"
             class="form-control"
             aria-label="Quantidade de folhas "
-            name="quant_folhas"
-            id="quant_folhas"
+            name="quantidade_folhas"
+            id="quantidade_folhas"
+            formControlName="quantidade_folhas"
             aria-describedby="inputGroup-sizing-default"
           />
         </div>
 
-        <div class="input-group mb-3">
+        <div class="input-group mb-3" formGroupName="papel">
           <div class="input-group-prepend">
             <label class="input-group-text" for="papel">Papel</label>
           </div>
-          <!-- <select class="custom-select" name="papel" id="papel">
-					<% for(var i=0;i< list['Papel'].length;i++){%>
-						<option value=<%=list['Papel'][i].id%>><%=list['Papel'][i].descricao%>
-						</option>
-						<%}%>
-				</select> -->
+          <input type="text" name="descricao" id="descricao" class="form-control"  formControlName="descricao"/>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -132,6 +124,7 @@
             type="text"
             class="form-control"
             aria-label="Observação"
+            formControlName="observacao"
             aria-describedby="input_observacao"
             name="obs"
           />
@@ -139,10 +132,7 @@
       </div>
 
       <div class="shadow p-3 mb-5 bg-white rounded">
-        <div
-          class="shadow-sm p-3 mb-5 rounded"
-
-        >
+        <div class="shadow-sm p-3 mb-5 rounded">
           <h5 class="text-center">Acabamentos</h5>
         </div>
         <div class="input-group mb-3">
@@ -308,7 +298,9 @@
           </div>
         </div>
       </div>
+     <mat-card class="mat-elevation-z8">
       <button type="submit" class="btn btn-outline-primary">Concluir</button>
+     </mat-card>
     </form>
   </div>
 </mat-card>
