@@ -1,9 +1,9 @@
 
 export class Paginator {
-  totalItems?: number
+  totalItems?: number = 0
    lista?: Object[]
-   totalPages?:number
-   currentPage?:number
+   totalPages?:number = 5
+   currentPage?:number =0
 }
 
 

@@ -6,6 +6,7 @@ import {MatSort} from '@angular/material/sort';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import { Cliente } from 'src/models/cliente';
+import { FiltroCliente } from 'src/models/filtros/filtro-cliente';
 import { Paginator } from 'src/models/Paginator';
 import { ClienteService } from '../service/cliente.service';
 import { SnackBars } from '../util/snack-bars';
@@ -19,7 +20,8 @@ export class ClienteComponent implements OnInit {
   loading = false;
   displayedColumns: string[] = ['position', 'name', 'dataCadastro', 'editar'];
   listaEmpresas:Cliente[] = []
-  teste :MatPaginator | undefined;
+
+  filtroCliente:FiltroCliente = new FiltroCliente();
 
   info:SnackBars = new SnackBars(this.snackBar);
    pagina:Paginator = new Paginator();
@@ -41,10 +43,11 @@ export class ClienteComponent implements OnInit {
     }else{
       this.pagina.currentPage = 0
     }
-
+    this.filtroCliente.paginacao= this.pagina
+    this.filtroCliente.id = 2
 
     this.loading = true
-    this.service.listarPaginado(this.pagina).subscribe((obj) =>{
+    this.service.listarPaginado(this.filtroCliente).subscribe((obj) =>{
       this.listaEmpresas = obj.lista as Cliente[];
       this.pagina = obj;
       this.loading = false;

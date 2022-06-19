@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { Cliente } from 'src/models/cliente';
+import { FiltroCliente } from 'src/models/filtros/filtro-cliente';
 import { ListaOrdemDeServico } from 'src/models/listaOrdemServico';
 import { Paginator } from 'src/models/Paginator';
 import { BaseClass } from './base.service';
@@ -33,7 +34,7 @@ export class ClienteService extends BaseClass {
   }
 
 
-  listarPaginado(obj?:Paginator) {
+  listarPaginado(obj?:FiltroCliente) {
 
     return this.httpClient.post<Paginator>(this.API_URL+'/lista_empresa',obj,this.httpOptions)
     .pipe(

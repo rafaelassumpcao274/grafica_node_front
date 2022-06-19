@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AutoCompleteService } from 'src/app/service/auto-complete.service';
 import { FormatoService } from 'src/app/service/formato.service';
 import { OrdemServicoService } from 'src/app/service/ordem-servico.service';
 import { SnackBars } from 'src/app/util/snack-bars';
+import { Cliente } from 'src/models/cliente';
+import { FiltroCliente } from 'src/models/filtros/filtro-cliente';
+import { FiltroFormato } from 'src/models/filtros/filtro-formato';
+import { FiltroPapel } from 'src/models/filtros/filtro-papel';
 import { Formato } from 'src/models/formato';
 import { OrdemDeServico } from 'src/models/ordem-de-servico';
 import { Paginator } from 'src/models/Paginator';
+import { Papel } from 'src/models/papel';
 
 @Component({
   selector: 'app-adicionar-ordem-servico',
@@ -17,16 +24,26 @@ import { Paginator } from 'src/models/Paginator';
 export class AdicionarOrdemServicoComponent implements OnInit {
 
   loading:boolean = false;
+  loadingAuto:boolean = false;
+
+
   listaOrdemServico:OrdemDeServico[] =[];
-  listaFormatos: Formato[] = [];
+
+
+  listaCliente: Observable<Cliente[]> | undefined;
+  listaFormato: Observable<Formato[]> | undefined;
+  listaPapel: Observable<Papel[]> | undefined;
 
   form!: FormGroup;
 
   id:number =0;
 
+  clienteForm: FormGroup = Cliente.formCliente();
+  data: Date = new Date();
+
 
   constructor(private service: OrdemServicoService,
-    private serviceFormato: FormatoService,
+    private autoCompleteService:AutoCompleteService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar) { }
 
@@ -37,21 +54,20 @@ export class AdicionarOrdemServicoComponent implements OnInit {
    ngOnInit(): void {
     this.route.params.subscribe(params => this.id = params['id'])
     this.obterform()
-
-
     if(this.id>0){
       this.service.obterPorId(this.id).subscribe((info) =>{
         console.log(info)
         if(info){
           this.setarForm(info as OrdemDeServico)
         }
-      },
-      (err)=>{
-
       })
 
     }
 
+   }
+
+   obterFormCliente(){
+    this.clienteForm = Cliente.formCliente();
    }
 
    obterform(){
@@ -61,10 +77,51 @@ export class AdicionarOrdemServicoComponent implements OnInit {
    setarForm(os:OrdemDeServico){
      console.log(this.form)
       this.form.patchValue(os);
-      this.form.get('dataPedido')?.patchValue(os.createdAt ?? new Date())
+      this.form.get('dataPedido')?.patchValue(os.createdAt ?? this.data)
    }
 
-   listar(){
+
+
+   autoCompleteCliente(evento:any){
+    let obj = evento.target as HTMLInputElement
+    if(obj.value.length > 2){
+      let filtro: FiltroCliente= new FiltroCliente();
+      filtro.nome_empresa = obj.value
+      filtro.paginacao = new Paginator();
+      this.loadingAuto = true;
+
+      this.listaCliente = this.autoCompleteService.listarCliente(filtro);
+
+    }}
+
+
+    autoCompleteFormato(evento:any){
+      let obj = evento.target as HTMLInputElement
+      if(obj.value.length > 0){
+        let filtro: FiltroFormato= new FiltroFormato();
+        filtro.descricao_formato = obj.value
+        filtro.paginacao = new Paginator();
+        this.loadingAuto = true;
+
+        this.listaFormato = this.autoCompleteService.listarFormato(filtro);
+
+      }
 
    }
-}
+
+   autoCompletePapel(evento:any){
+    let obj = evento.target as HTMLInputElement
+    if(obj.value.length > 2){
+      let filtro: FiltroPapel= new FiltroPapel();
+      filtro.descricao = obj.value
+      filtro.paginacao = new Paginator();
+      this.loadingAuto = true;
+
+      this.listaPapel = this.autoCompleteService.listarPapel(filtro);
+
+    }
+
+ }
+
+  }
+

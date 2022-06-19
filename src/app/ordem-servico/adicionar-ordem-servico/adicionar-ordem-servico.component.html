@@ -4,24 +4,31 @@
       <nav class="navbar navbar-light bg-light">
         <div class="col">
           <h6>Data pedido</h6>
-          <p>{{ this.form.get("createdAt")?.value | date: "dd/MM/YY" }}</p>
+          <p>{{ this.form.get("createdAt")?.value ? this.form.get("createdAt")?.value:data | date: "dd/MM/YY" }}</p>
         </div>
         <!-- <div class="col"><img class="rounded " src="imagens/logo.jpg" height="70" width="150"></div> -->
       </nav>
       <div class="shadow p-3 mb-5 bg-white rounded">
         <div class="input-group mb-3" formGroupName="cliente">
           <div class="input-group-prepend">
-            <span class="input-group-text">Cliente</span>
+              <span class="input-group-text">Cliente</span>
           </div>
-          <input
-            type="text"
-            aria-label="Cliente"
-            class="form-control"
-            name="nome_empresa"
-            id="nome_empresa"
-            formControlName="nome_empresa"
-            required
-          />
+          <!-- <mat-form-field appearance="outline"> -->
+            <input type="text"
+                   aria-label="Number"
+                   matInput
+                   class="form-control"
+                   style="border: 1px solid #ced4da"
+                   formControlName="nome_empresa"
+                   [matAutocomplete]="autoCliente"
+                   (input)="autoCompleteCliente($event)">
+            <mat-autocomplete #autoCliente="matAutocomplete">
+              <mat-progress-bar *ngIf="!loadingAuto" mode="indeterminate"></mat-progress-bar>
+              <mat-option *ngFor="let result of listaCliente | async" [value]="result.nome_empresa">
+                {{result.nome_empresa}}
+              </mat-option>
+            </mat-autocomplete>
+          <!-- </mat-form-field> -->
         </div>
 
         <div class="input-group mb-3">
@@ -89,7 +96,15 @@
             id="descricao_formato"
             formControlName="descricao_formato"
             class="form-control"
-          />
+            style="border: 1px solid #ced4da"
+            [matAutocomplete]="autoFormato"
+            (input)="autoCompleteFormato($event)">
+          <mat-autocomplete #autoFormato="matAutocomplete">
+            <mat-progress-bar *ngIf="!loadingAuto" mode="indeterminate"></mat-progress-bar>
+            <mat-option *ngFor="let result of listaFormato | async" [value]="result.descricao_formato">
+              {{result.descricao_formato}}
+            </mat-option>
+          </mat-autocomplete>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -112,7 +127,21 @@
           <div class="input-group-prepend">
             <label class="input-group-text" for="papel">Papel</label>
           </div>
-          <input type="text" name="descricao" id="descricao" class="form-control"  formControlName="descricao"/>
+          <input
+            type="text"
+            name="descricao"
+            id="descricao"
+            formControlName="descricao"
+            class="form-control"
+            style="border: 1px solid #ced4da"
+            [matAutocomplete]="autoPapel"
+            (input)="autoCompletePapel($event)">
+          <mat-autocomplete #autoPapel="matAutocomplete">
+            <mat-progress-bar *ngIf="!loadingAuto" mode="indeterminate"></mat-progress-bar>
+            <mat-option *ngFor="let result of listaPapel | async" [value]="result.descricao">
+              {{result.descricao}}
+            </mat-option>
+          </mat-autocomplete>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -298,9 +327,9 @@
           </div>
         </div>
       </div>
-     <mat-card class="mat-elevation-z8">
-      <button type="submit" class="btn btn-outline-primary">Concluir</button>
-     </mat-card>
+      <mat-card class="mat-elevation-z8">
+        <button type="submit" class="btn btn-outline-primary">Concluir</button>
+      </mat-card>
     </form>
   </div>
 </mat-card>

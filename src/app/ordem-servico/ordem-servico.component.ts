@@ -18,6 +18,7 @@ export class OrdemServicoComponent implements OnInit {
   loading:boolean = false;
   listaOrdemServico:OrdemDeServico[] =[];
   listaFormatos: Formato[] = [];
+  
 
   displayedColumns: string[] = ['position','empresa', 'name', 'dataCadastro', 'editar'];
 
