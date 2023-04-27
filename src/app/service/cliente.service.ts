@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, Observable, retry, throwError } from 'rxjs';
@@ -21,7 +21,8 @@ export class ClienteService extends BaseClass {
 
   // Headers
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    params:new HttpParams()
   }
 
   obterPorId(id:number) {
@@ -37,6 +38,15 @@ export class ClienteService extends BaseClass {
   listarPaginado(obj?:FiltroCliente) {
 
     return this.httpClient.post<Paginator>(this.API_URL+'/lista_empresa',obj,this.httpOptions)
+    .pipe(
+      retry(0),
+      catchError(this.handleError)
+    )
+  }
+
+  listar(obj?:FiltroCliente) {
+   this.httpOptions.params.set("page",obj?.paginacao?.currentPage ?? 0)
+    return this.httpClient.get<Paginator>(this.API_URL+'/empresa',this.httpOptions)
     .pipe(
       retry(0),
       catchError(this.handleError)

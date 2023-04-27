@@ -4,12 +4,12 @@ import { Cidade } from "./cidade";
 export class Bairro {
 
     id?:number;
-    descricao_bairro?: string;
+    descricao?: string;
     cidade?:Cidade;
 
     static formBairro(){
       return new FormGroup({
-        descricao_bairro: new FormControl(),
+        descricao: new FormControl(),
         cidade : Cidade.formCidade()
       });
     }

@@ -4,18 +4,18 @@ import { Endereco } from "./endereco";
 export class Cliente {
 
     id?:number;
-    nome_empresa?: string;
-    razao_social?: string;
+    nomeEmpresa?: string;
+    razaoSocial?: string;
     endereco?:Endereco;
     cnpj?:number;
     email?: string;
     contato?: string;
-    telefone?:number;
+    telefone?:string;
 
     static formCliente(){
       return new FormGroup({
-        nome_empresa: new FormControl(),
-        razao_social:  new FormControl(),
+        nomeEmpresa: new FormControl(),
+        razaoSocial:  new FormControl(),
         cnpj: new FormControl(),
         email:  new FormControl(),
         contato:  new FormControl(),

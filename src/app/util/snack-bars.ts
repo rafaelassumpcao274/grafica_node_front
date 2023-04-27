@@ -10,12 +10,24 @@ export class SnackBars {
 
   showMessageError(error: HttpErrorResponse) {
     let message = error.error ?? error.message;
-    if(error.status && error.status === 400){
-      this.showWarning(message);
+    if(error.status){
+
+        if(error.status === 400){
+          this.showWarning(message);
+        }
+        if(error.status === 401 || error.status === 403){
+          this.showWarning("Acesso não Autorizado");
+        }
+        if(error.status === 404){
+          this.showError(message)
+        }
+
     }else{
       this.showError(message);
     }
   }
+
+
   showSuccess(message: string) {
     this.config.duration = 2000;
     this.config.panelClass = ['green-snackbar', 'login-snackbar'],

@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBars } from "../util/snack-bars";
 
 export class BaseClass{
-  API_URL = 'http://localhost:3000';
+  API_URL = 'http://localhost:8080';
   constructor( ){}
 
 
@@ -19,6 +19,7 @@ export class BaseClass{
       // Erro ocorreu no lado do servidor
       errorMessage = error.error ?? error.message;
       // errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
+
     }
         console.error(errorMessage);
     return throwError(error);

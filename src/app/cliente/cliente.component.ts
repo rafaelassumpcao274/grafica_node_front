@@ -44,10 +44,9 @@ export class ClienteComponent implements OnInit {
       this.pagina.currentPage = 0
     }
     this.filtroCliente.paginacao= this.pagina
-    this.filtroCliente.id = 2
 
     this.loading = true
-    this.service.listarPaginado(this.filtroCliente).subscribe((obj) =>{
+    this.service.listar(this.filtroCliente).subscribe((obj) =>{
       this.listaEmpresas = obj.lista as Cliente[];
       this.pagina = obj;
       this.loading = false;

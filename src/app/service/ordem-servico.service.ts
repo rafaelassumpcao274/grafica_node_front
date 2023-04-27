@@ -21,7 +21,7 @@ export class OrdemServicoService extends BaseClass{
 
   listarPaginado(obj?:Paginator) {
 
-    return this.httpClient.post<Paginator>(this.API_URL+'/ordem-servico',obj,this.httpOptions)
+    return this.httpClient.post<Paginator>(this.API_URL+'/lista-ordem-servico',obj,this.httpOptions)
     .pipe(
       retry(0),
       catchError(this.handleError)

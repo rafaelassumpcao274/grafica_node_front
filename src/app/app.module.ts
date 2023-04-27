@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -26,6 +26,11 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { AdicionarOrdemServicoComponent } from './ordem-servico/adicionar-ordem-servico/adicionar-ordem-servico.component';
+import { TokenInterceptor } from './service/interceptors/token.interceptor';
+import { LogadoComponent } from './login/logado/logado.component';
+import { LogarComponent } from './login/logar/logar.component';
+import { LoginModule } from './login/login.module';
+import { PhoneMaskDirective } from './phone-mask.directive';
 
 
 
@@ -41,14 +46,13 @@ import { AdicionarOrdemServicoComponent } from './ordem-servico/adicionar-ordem-
     AdicionarClienteComponent,
     LoadingComponent,
     OrdemServicoComponent,
-    LoginComponent,
     RegistroComponent,
     AdicionarOrdemServicoComponent,
-
+    PhoneMaskDirective,
 
   ],
   imports: [
-
+    LoginModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -58,7 +62,7 @@ import { AdicionarOrdemServicoComponent } from './ordem-servico/adicionar-ordem-
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
