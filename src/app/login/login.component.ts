@@ -1,6 +1,6 @@
 import { Component, ComponentFactory, DoCheck, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/models/user';
 import { AuthenticationService } from '../service/authentication.service';

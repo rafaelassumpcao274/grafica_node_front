@@ -1,7 +1,7 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import {MatLegacyPaginator as MatPaginator} from '@angular/material/legacy-paginator';
+import { MatLegacySnackBar as MatSnackBar, MatLegacySnackBarConfig as MatSnackBarConfig } from '@angular/material/legacy-snack-bar';
 import {MatSort} from '@angular/material/sort';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';

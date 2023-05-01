@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormArray } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { ClienteService } from 'src/app/service/cliente.service';
 import { MyMaskUtil } from 'src/app/util/my-mask';

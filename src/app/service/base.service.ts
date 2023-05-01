@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { throwError } from "rxjs";
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { SnackBars } from "../util/snack-bars";
 
 export class BaseClass{

@@ -18,7 +18,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { AdicionarClienteComponent } from './cliente/adicionar-cliente/adicionar-cliente.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
+import { MAT_LEGACY_RADIO_DEFAULT_OPTIONS as MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/legacy-radio';
 import { LoadingComponent } from './core/loading/loading.component';
 import { SnackBars } from './util/snack-bars';
 import { OrdemServicoComponent } from './ordem-servico/ordem-servico.component';
