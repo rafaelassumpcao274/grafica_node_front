@@ -13,8 +13,8 @@ import { TabelaCesComponent } from './ces/tabela-ces/tabela-ces.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MaterialExampleModule} from '../material.module';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MaterialExampleModule } from '../material.module';
+import { MatNativeDateModule } from '@angular/material/core';
 import { AdicionarClienteComponent } from './cliente/adicionar-cliente/adicionar-cliente.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +30,6 @@ import { TokenInterceptor } from './service/interceptors/token.interceptor';
 import { LogadoComponent } from './login/logado/logado.component';
 import { LogarComponent } from './login/logar/logar.component';
 import { LoginModule } from './login/login.module';
-import { PhoneMaskDirective } from './phone-mask.directive';
 
 
 
@@ -48,7 +47,7 @@ import { PhoneMaskDirective } from './phone-mask.directive';
     OrdemServicoComponent,
     RegistroComponent,
     AdicionarOrdemServicoComponent,
-    PhoneMaskDirective,
+
 
   ],
   imports: [

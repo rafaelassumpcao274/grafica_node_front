@@ -10,16 +10,15 @@ import { AuthenticationService } from '../authentication.service';
 export class TokenInterceptor implements HttpInterceptor {
     constructor(private usuarioService : AuthenticationService) {}
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token = this.usuarioService.obterTokenUsuario;
+        const token = this.usuarioService.obterTokenUsuario();
         const requestUrl: Array<any> = request.url.split('/');
         // const apiUrl: Array<any> = "http://127.0.0.1:3000/".split('/');
-        const apiUrl: Array<any> = "http://127.0.0.1:8080/".split('/');
+        const apiUrl: Array<any> = "http://localhost:8080/".split('/');
 
         if (token && requestUrl[2] === apiUrl[2]) {
             request = request.clone({
                 setHeaders: {
                     Authorization: `Bearer ${token}`,
-                    token: `${token}`
                 }
             });
             return next.handle(request).pipe(

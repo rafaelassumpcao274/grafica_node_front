@@ -1,6 +1,6 @@
 import { Component, ComponentFactory, DoCheck, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/models/user';
 import { AuthenticationService } from '../service/authentication.service';
@@ -32,30 +32,33 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
 
-    let user:User = this.obterUsuarioLogado()
-    if(user){
 
        this.temUsuario = this.validaUsuarioLogado();
-       this.usuarioLogado = user;
+
+  }
+
+
+  obterNomeUsuario():string{
+
+    if(this.validaUsuarioLogado()){
+        return this.service.obterNomeUsuarioLogado();
     }
-
-
+    return 'Login'
   }
 
-  obterUsuario():void{
+  // obterUsuario():void{
 
-    this.usuarioLogado = localStorage.getItem('usuario')
-    ? JSON.parse(atob(localStorage.getItem('usuario') ?? ''))
-    : null;
+  //   this.usuarioLogado.nome = localStorage.getItem('usuario')
+  //   ? atob(localStorage.getItem('usuario')?? ''): 'Login';
 
 
-  }
+  // }
 
-  obterUsuarioLogado():User{
-    return localStorage.getItem('usuario')
-    ? JSON.parse(atob(localStorage.getItem('usuario') ?? ''))
-    : null;
-  }
+  // obterUsuarioLogado():User{
+  //   return localStorage.getItem('usuario')
+  //   ? JSON.parse(atob(localStorage.getItem('usuario') ?? ''))
+  //   : null;
+  // }
 
 
   validaUsuarioLogado():boolean {

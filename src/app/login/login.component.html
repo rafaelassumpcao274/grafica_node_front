@@ -6,13 +6,13 @@
   aria-expanded="false"
   data-bs-auto-close="outside"
 >
-  {{ usuarioLogado.nome ? usuarioLogado.nome : "login" }}
+  {{ this.obterNomeUsuario() }}
 </button>
 
 
 <div class="dropdown-menu dropdown-menu-right">
-  <login-logado *ngIf="this.usuarioLogado?.id" [(usuario)]="this.usuarioLogado"></login-logado>
-  <login-logar  *ngIf="!this.usuarioLogado?.id" (usuarioLogado)="obterUsuario()"></login-logar>
+  <login-logado *ngIf="this.validaUsuarioLogado()" [(usuario)]="this.usuarioLogado"></login-logado>
+  <login-logar  *ngIf="!this.validaUsuarioLogado()" (usuarioLogado)="this.usuarioLogado"></login-logar>
 </div>
 
 

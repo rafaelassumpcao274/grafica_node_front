@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { SnackBars } from 'src/app/util/snack-bars';
+import { Token } from 'src/models/token';
 import { User } from 'src/models/user';
 
 @Component({
@@ -34,9 +35,11 @@ export class LogarComponent implements OnInit {
   onSubmit(){
     let usuario:User =this.formUser.value;
     this.loading = true
-    this.service.logar(usuario).subscribe((msg) =>{
-        this.usuario = msg.user;
+    this.service.logar(usuario).subscribe((tokenProvider:Token) =>{
+        this.usuario = new User();
+        this.usuario.nome = tokenProvider.username
         this.loading = false;
+        this.service.logar
         this.usuarioLogado.emit(this.usuario)
     },(error)=>{
       this.loading = false;

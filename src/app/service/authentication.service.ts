@@ -1,10 +1,11 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { catchError, Observable, pipe, retry, tap, throwError } from 'rxjs';
 import { User } from 'src/models/user';
 import { BaseClass } from './base.service';
+import { Token } from 'src/models/token';
 
 @Injectable({
   providedIn: 'root'
@@ -40,12 +41,11 @@ export class AuthenticationService extends BaseClass {
       )
   }
   logar(usuario: User) : Observable<any> {
-    return this.httpClient.post<any>(this.API_URL+'/auth/signin', usuario).pipe(
-      tap((resposta) => {
-        if(!resposta.token) return;
-        localStorage.setItem('token', btoa(JSON.stringify(resposta['accessToken'])));
-        localStorage.setItem('usuario', btoa(JSON.stringify(resposta.user)));
-
+    return this.httpClient.post<Token>(this.API_URL+'/auth/signin', usuario).pipe(
+      tap((resposta:Token) => {
+        if(!resposta.accessToken) return;
+        localStorage.setItem('token', btoa(JSON.stringify(resposta)));
+        localStorage.setItem('nomeUsuario',resposta.username);
       }));
 
   }
@@ -59,18 +59,26 @@ export class AuthenticationService extends BaseClass {
     ? JSON.parse(atob(localStorage.getItem('usuario') ?? ''))
     : '';
 }
+
+obterNomeUsuarioLogado(): string {
+  return localStorage.getItem('nomeUsuario') ?? '';
+}
 //  obterIdUsuarioLogado(): string {
 //   return localStorage.getItem('usuario')
 //     ? (JSON.parse(atob(localStorage.getItem('usuario'))) as User).id
 //     : null;
 // }
 obterTokenUsuario(): string {
-  return localStorage.getItem('accessToken')
-    ? JSON.parse(atob(localStorage.getItem('accessToken')??''))
-    : null;
+  if(localStorage.getItem('token')){
+    let token =  JSON.parse(atob(localStorage.getItem('token')?? '')) as Token
+    return token.accessToken;
+  }
+  return ''
 }
+
+
  logado(): boolean {
-  return localStorage.getItem('accessToken') ? true : false;
+  return localStorage.getItem('token') ? true : false;
 }
 }
 

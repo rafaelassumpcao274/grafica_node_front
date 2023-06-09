@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry } from 'rxjs';
 import { OrdemDeServico } from 'src/models/ordem-de-servico';
@@ -21,7 +21,10 @@ export class OrdemServicoService extends BaseClass{
 
   listarPaginado(obj?:Paginator) {
 
-    return this.httpClient.post<Paginator>(this.API_URL+'/lista-ordem-servico',obj,this.httpOptions)
+    // let params:HttpParams = new HttpParams();
+    // params.append("page",obj?.currentPage)
+    // params.append("totalitens",obj?.totalItems);
+    return this.httpClient.get<Paginator>(this.API_URL+'/ordemservico',this.httpOptions)
     .pipe(
       retry(0),
       catchError(this.handleError)
@@ -30,7 +33,7 @@ export class OrdemServicoService extends BaseClass{
 
   salvar(ordemServico: OrdemDeServico): Observable<OrdemDeServico> {
 
-    return this.httpClient.post<OrdemDeServico>(this.API_URL+'/ordem-servico/',ordemServico,this.httpOptions)
+    return this.httpClient.post<OrdemDeServico>(this.API_URL+'/ordemservico',ordemServico,this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -38,7 +41,7 @@ export class OrdemServicoService extends BaseClass{
   }
   obterPorId(id:number): Observable<OrdemDeServico> {
 
-    return this.httpClient.get<OrdemDeServico>(this.API_URL+'/ordem-servico/'+id,this.httpOptions)
+    return this.httpClient.get<OrdemDeServico>(this.API_URL+'/ordemservico/'+id,this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)

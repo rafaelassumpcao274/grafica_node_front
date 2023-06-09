@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, debounceTime, Observable, retry, throwError } from 'rxjs';
 import { Cliente } from 'src/models/cliente';
 import { FiltroCliente } from 'src/models/filtros/filtro-cliente';

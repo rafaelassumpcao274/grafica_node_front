@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Formato } from 'src/models/formato';
 import { OrdemDeServico } from 'src/models/ordem-de-servico';
 import { Paginator } from 'src/models/Paginator';
