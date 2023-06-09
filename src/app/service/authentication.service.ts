@@ -40,10 +40,10 @@ export class AuthenticationService extends BaseClass {
       )
   }
   logar(usuario: User) : Observable<any> {
-    return this.httpClient.post<any>(this.API_URL+'/login', usuario).pipe(
+    return this.httpClient.post<any>(this.API_URL+'/auth/signin', usuario).pipe(
       tap((resposta) => {
         if(!resposta.token) return;
-        localStorage.setItem('token', btoa(JSON.stringify(resposta['token'])));
+        localStorage.setItem('token', btoa(JSON.stringify(resposta['accessToken'])));
         localStorage.setItem('usuario', btoa(JSON.stringify(resposta.user)));
 
       }));
@@ -65,12 +65,12 @@ export class AuthenticationService extends BaseClass {
 //     : null;
 // }
 obterTokenUsuario(): string {
-  return localStorage.getItem('token')
-    ? JSON.parse(atob(localStorage.getItem('token')??''))
+  return localStorage.getItem('accessToken')
+    ? JSON.parse(atob(localStorage.getItem('accessToken')??''))
     : null;
 }
  logado(): boolean {
-  return localStorage.getItem('token') ? true : false;
+  return localStorage.getItem('accessToken') ? true : false;
 }
 }
 

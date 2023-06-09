@@ -1,20 +1,14 @@
 
-  <login-loading [loading]="loading"></login-loading>
+
   <div *ngIf="!loading">
     <form class="px-4 py-3" [formGroup]="formUser" (submit)="onSubmit()">
-      <div class="form-group">
-        <mat-form-field appearance="outline">
-          <mat-label>Login</mat-label>
-          <input
-            matInput
-            type="text"
-            name="nome"
-            id="nome"
-            formControlName="nome"
-          />
-        </mat-form-field>
-      </div>
-      <div class="form-group">
+
+      <mat-form-field >
+        <mat-label>Login</mat-label>
+        <input type="text" matInput formControlName="nome" 
+               >
+      </mat-form-field>
+<!--       <div class="form-group">
         <mat-form-field appearance="outline">
           <mat-label>Senha</mat-label>
           <input
@@ -34,7 +28,7 @@
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
         </mat-form-field>
-      </div>
+      </div> -->
       <div class="form-group">
         <div class="form-check">
           <input type="checkbox" class="form-check-input" id="dropdownCheck" />
@@ -45,8 +39,8 @@
       </div>
       <button type="submit" class="btn btn-primary">Sign in</button>
     </form>
-    <div class="dropdown-divider"></div>
+    <!-- <div class="dropdown-divider"></div>
     <a class="dropdown-item" routerLink="/registro">New around here? Sign up</a>
-    <a class="dropdown-item" href="#">Forgot password?</a>
+    <a class="dropdown-item" href="#">Forgot password?</a> -->
   </div>
 
