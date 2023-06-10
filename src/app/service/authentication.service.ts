@@ -71,7 +71,11 @@ obterNomeUsuarioLogado(): string {
 obterTokenUsuario(): string {
   if(localStorage.getItem('token')){
     let token =  JSON.parse(atob(localStorage.getItem('token')?? '')) as Token
-    return token.accessToken;
+    if(token.expiration < new Date){
+      return token.accessToken;
+    }
+    return token.refreshToken;
+    
   }
   return ''
 }

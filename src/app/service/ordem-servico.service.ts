@@ -21,9 +21,6 @@ export class OrdemServicoService extends BaseClass{
 
   listarPaginado(obj?:Paginator) {
 
-    // let params:HttpParams = new HttpParams();
-    // params.append("page",obj?.currentPage)
-    // params.append("totalitens",obj?.totalItems);
     return this.httpClient.get<Paginator>(this.API_URL+'/ordemservico',this.httpOptions)
     .pipe(
       retry(0),

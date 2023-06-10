@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, debounceTime, Observable, retry, throwError } from 'rxjs';
@@ -30,12 +30,21 @@ export class AutoCompleteService extends BaseClass {
    httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
-    })
+    }),
+    params: new HttpParams()
   };
 
 
+
+
   listarCliente(obj?:FiltroCliente) {
-    return this.httpClient.post<Cliente[]>(this.API_URL+'/autoComplete/cliente',obj,this.httpOptions)
+   
+
+    if(obj) {
+      obj.descricaoGr = obj.nome_empresa
+      this.httpOptions.params = this.Params(obj)
+    }
+    return this.httpClient.get<Cliente[]>(this.API_URL+'/autocomplete/empresa',this.httpOptions)
     .pipe(
       debounceTime(300),
       retry(0),

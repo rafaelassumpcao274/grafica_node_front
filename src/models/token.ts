@@ -3,7 +3,7 @@ export class Token{
     username: string = ''; 
     authenticated?: Boolean;
     created?: Date;
-    expiration?: Date;
+    expiration: Date = new Date;
     accessToken: string = '';
-    refreshToken?: string;
+    refreshToken: string = '';
 }

@@ -1,13 +1,26 @@
-import { HttpErrorResponse } from "@angular/common/http";
+import { HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { throwError } from "rxjs";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBars } from "../util/snack-bars";
+import { FiltroGeral } from "src/models/filtros/filtro-geral";
 
 export class BaseClass{
   API_URL = 'http://localhost:8080';
   constructor( ){}
 
+  Params(obj: FiltroGeral):HttpParams{
 
+
+  return new HttpParams({
+  fromObject: {
+    page:0,
+    totalItens:0,
+    descricao: obj.descricaoGr ?? ""
+  }
+});
+
+
+  }
 
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
