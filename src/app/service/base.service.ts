@@ -34,6 +34,11 @@ export class BaseClass{
 
       switch(error.status){
 
+        case 403:{
+          errorMessage = "Usuario não Autenticado !!!"
+          
+          break
+        }
         case 404: {
           errorMessage = "Endereco especificado não encontrado !!!"
           break;
@@ -44,7 +49,7 @@ export class BaseClass{
         }
       }
 
-      errorMessage = error.error ?? error.message;
+      // errorMessage = error.error ?? error.message;
       // errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
 
     }

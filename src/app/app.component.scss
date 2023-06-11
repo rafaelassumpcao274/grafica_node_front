@@ -1,18 +1,26 @@
-.green-snackbar {
-  background: rgb(65, 252, 134);
-  color: white;
-}
-.green-snackbar button {
-  background-color: rgb(65, 252, 134);
-  color: white;
-  border: none;
-}
+// .green-snackbar {
+//   background: rgb(65, 252, 134);
+//   color: white;
+// }
+// .green-snackbar button {
+//   background-color: rgb(65, 252, 134);
+//   color: white;
+//   border: none;
+// }
 .red-snackbar {
-  background: #F44336 !important;
-  color: white!important;
+
+  .mat-mdc-snack-bar-container {
+    &.blue-snackbar {
+      --mdc-snackbar-container-color: #2196f3 !important;
+      --mat-mdc-snack-bar-button-color: #fff !important;
+      --mdc-snackbar-supporting-text-color: #fff !important;
+    }
+  }
 }
-.red-snackbar button {
-  background-color: #F44336;
-  color: white !important;
-  border: none !important;
-}
+  
+
+// .red-snackbar button {
+//   background-color: #F44336;
+//   color: white !important;
+//   border: none !important;
+// }

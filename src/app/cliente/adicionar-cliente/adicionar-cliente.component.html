@@ -102,11 +102,13 @@
             <mat-label>Cep</mat-label>
             <input
               matInput
-              type="number"
+              type="text"
               name="cep"
               id="cep"
-              maxlength="8"
+              maxlength="9"
+              placeholder="99999-999"
               formControlName="cep"
+              (input)="autoCompleteCep($event)"
             />
           </mat-form-field>
 

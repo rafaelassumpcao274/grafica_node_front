@@ -9,13 +9,13 @@ export class SnackBars {
   config: MatSnackBarConfig = new MatSnackBarConfig();
 
   showMessageError(error: HttpErrorResponse) {
-    let message = error.error ?? error.message;
-    if(error.status){
+    let message = error.error.message ?? error.message;
+    if(error.status < 500){
 
         if(error.status === 400){
           this.showWarning(message);
         }
-        if(error.status === 401 || error.status === 403){
+        if(error.status === 403){
           this.showWarning("Acesso não Autorizado");
         }
         if(error.status === 404){
@@ -30,19 +30,19 @@ export class SnackBars {
 
   showSuccess(message: string) {
     this.config.duration = 2000;
-    this.config.panelClass = ['green-snackbar', 'login-snackbar'],
+    // this.config.panelClass = ['green-snackbar', 'login-snackbar'],
       this.snackBar.open(message, "X", this.config);
   }
 
   showError(message: string) {
     this.config.duration = 5000;
-    this.config.panelClass = ['red-snackbar', 'login-snackbar'],
-      this.snackBar.open(message, "X", this.config);
+    this.config.panelClass = ['red-snackbar']
+    this.snackBar.open(message, "X", this.config);
   }
 
   showWarning(message: string) {
     this.config.duration = 5000;
-    this.config.panelClass = ['orange-snackbar', 'login-snackbar'],
+    // this.config.panelClass = ['orange-snackbar', 'login-snackbar'],
       this.snackBar.open(message, "X", this.config);
   }
 

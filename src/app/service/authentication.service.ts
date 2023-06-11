@@ -5,20 +5,25 @@ import { Router } from '@angular/router';
 import { catchError, Observable, pipe, retry, tap, throwError } from 'rxjs';
 import { User } from 'src/models/user';
 import { BaseClass } from './base.service';
+import { DateUtils } from '../util/dateUtils';
 import { Token } from 'src/models/token';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService extends BaseClass {
 
-
+  storage:LocalStorageService =  new LocalStorageService(window.sessionStorage)
   constructor(private httpClient: HttpClient,
     private router: Router,
     ) {
     super();
+
+    this.storage = this.setStorage(localStorage.getItem('token') !== null)
   }
 
+  local:boolean = false;
   // Headers
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -33,6 +38,15 @@ export class AuthenticationService extends BaseClass {
       )
   }
 
+  setStorage(rememberMe:boolean){
+    this.storage.clear()
+    if(rememberMe){
+      return new LocalStorageService(window.localStorage)
+    }
+    return new LocalStorageService(window.sessionStorage)
+ 
+  }
+
   registrar(user: User): Observable<User> {
     return this.httpClient.post<User>(this.API_URL+'/login/registrar',user,this.httpOptions)
       .pipe(
@@ -43,46 +57,57 @@ export class AuthenticationService extends BaseClass {
   logar(usuario: User) : Observable<any> {
     return this.httpClient.post<Token>(this.API_URL+'/auth/signin', usuario).pipe(
       tap((resposta:Token) => {
-        if(!resposta.accessToken) return;
-        localStorage.setItem('token', btoa(JSON.stringify(resposta)));
-        localStorage.setItem('nomeUsuario',resposta.username);
+
+      this.storage = this.setStorage(usuario.rememberMe)
+
+      if(!resposta.accessToken) return;
+      this.storage.set('token', resposta);
+      this.storage.set('nomeUsuario',resposta.username);
       }));
+
 
   }
 
   deslogar() {
-    localStorage.clear();
+    this.storage.clear();
 
 }
  obterUsuarioLogado(): User {
-  return localStorage.getItem('usuario')
-    ? JSON.parse(atob(localStorage.getItem('usuario') ?? ''))
-    : '';
+  return this.storage.get('usuario') ?? ""
 }
 
 obterNomeUsuarioLogado(): string {
-  return localStorage.getItem('nomeUsuario') ?? '';
+  return this.storage.get('nomeUsuario') ?? '';
 }
 //  obterIdUsuarioLogado(): string {
-//   return localStorage.getItem('usuario')
-//     ? (JSON.parse(atob(localStorage.getItem('usuario'))) as User).id
+//   return this.storage.getItem('usuario')
+//     ? (JSON.parse(atob(this.storage.getItem('usuario'))) as User).id
 //     : null;
 // }
-obterTokenUsuario(): string {
-  if(localStorage.getItem('token')){
-    let token =  JSON.parse(atob(localStorage.getItem('token')?? '')) as Token
-    if(token.expiration < new Date){
+obterTokenUsuario() {
+
+  if(this.storage.get('token')){
+    let token =  this.storage.get('token') as Token
+    if(token.expiration < new Date()){
       return token.accessToken;
     }
-    return token.refreshToken;
+    let dataUtil:DateUtils = new DateUtils();
     
+    if(dataUtil.addHora(token.expiration,1) > new Date()){
+      return token.refreshToken
+  
+    }
+    this.deslogar()
   }
-  return ''
+  return null;
 }
+
 
 
  logado(): boolean {
-  return localStorage.getItem('token') ? true : false;
+  return this.storage.get('token') ? true : false;
 }
+
+
 }
 
