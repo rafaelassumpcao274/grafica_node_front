@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { AutoCompleteService } from 'src/app/service/auto-complete.service';
 import { ClienteService } from 'src/app/service/cliente.service';
 import { MyMaskUtil } from 'src/app/util/my-mask';
 import { SnackBars } from 'src/app/util/snack-bars';
@@ -11,6 +12,7 @@ import { Bairro } from 'src/models/bairro';
 import { Cidade } from 'src/models/cidade';
 import { Cliente } from 'src/models/cliente';
 import { Endereco } from 'src/models/endereco';
+import { FiltroGeral } from 'src/models/filtros/filtro-geral';
 import { Uf } from 'src/models/uf';
 
 @Component({
@@ -48,6 +50,7 @@ export class AdicionarClienteComponent implements OnInit {
     private service: ClienteService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
+    private autoCompleteService: AutoCompleteService,
   ) { }
 
   info: SnackBars = new SnackBars(this.snackBar);
@@ -81,7 +84,7 @@ export class AdicionarClienteComponent implements OnInit {
     /* this.createForm(new Cliente()); */
   }
 
-  inicializarForms():void{
+  inicializarForms(): void {
     this.formCliente = Cliente.formCliente();
     this.formEndereco = Endereco.formEndereco();
     this.formBairro = Bairro.formBairro();
@@ -91,11 +94,30 @@ export class AdicionarClienteComponent implements OnInit {
 
   createForm(cliente: Cliente) {
     this.formCliente = this.converterEmForm(cliente, this.formCliente)
-    this.formEndereco = this.converterEmForm(cliente.endereco, this.formEndereco)
-    this.formBairro = this.converterEmForm(cliente.endereco?.bairro, this.formBairro)
-    this.formCidade = this.converterEmForm(cliente.endereco?.bairro?.cidade, this.formCidade)
-    this.formUf = this.converterEmForm(cliente.endereco?.bairro?.cidade?.uf, this.formUf)
+    if (cliente.endereco) {
+      this.setarEnderecoForm(cliente.endereco);
+    }
 
+  }
+
+  setarEnderecoForm(endereco: Endereco) {
+    this.formEndereco = this.converterEmForm(endereco, this.formEndereco)
+    this.formBairro = this.converterEmForm(endereco.bairro, this.formBairro)
+    this.formCidade = this.converterEmForm(endereco.bairro?.cidade, this.formCidade)
+    this.formUf = this.converterEmForm(endereco.bairro?.cidade?.uf, this.formUf)
+  }
+
+  autoCompleteCep(evento: any) {
+    let obj = evento.target as HTMLInputElement
+    if (obj.value.length > 7) {
+      let filtro: FiltroGeral = new FiltroGeral()
+      filtro.descricaoGr = obj.value
+
+      this.autoCompleteService.buscarCep(filtro).subscribe(endereco => {
+        this.setarEnderecoForm(endereco)
+      })
+
+    }
   }
 
   converterEmForm(valor: any, form: FormGroup): FormGroup {
