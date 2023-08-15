@@ -3,10 +3,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AcabamentosService } from 'src/app/service/acabamentos.service';
 import { AutoCompleteService } from 'src/app/service/auto-complete.service';
 import { FormatoService } from 'src/app/service/formato.service';
 import { OrdemServicoService } from 'src/app/service/ordem-servico.service';
 import { SnackBars } from 'src/app/util/snack-bars';
+import { Acabamentos } from 'src/models/acabamentos';
 import { Cliente } from 'src/models/cliente';
 import { FiltroCliente } from 'src/models/filtros/filtro-cliente';
 import { FiltroFormato } from 'src/models/filtros/filtro-formato';
@@ -28,6 +30,8 @@ export class AdicionarOrdemServicoComponent implements OnInit {
 
 
   listaOrdemServico: OrdemDeServico[] = [];
+
+  listaAcabamentos:Acabamentos[] = [];
 
 
   listaCliente: Observable<Cliente[]> | undefined;
@@ -63,7 +67,6 @@ export class AdicionarOrdemServicoComponent implements OnInit {
       })
 
     }
-
   }
 
   obterFormCliente() {
@@ -103,11 +106,10 @@ export class AdicionarOrdemServicoComponent implements OnInit {
 
 
     let formOrdem: OrdemDeServico = this.form.value
-
-
-
     return formOrdem;
   }
+
+
 
   autoCompleteCliente(evento: any) {
     let obj = evento.target as HTMLInputElement
@@ -124,9 +126,9 @@ export class AdicionarOrdemServicoComponent implements OnInit {
 
   autoCompleteFormato(evento: any) {
     let obj = evento.target as HTMLInputElement
-    if (obj.value.length > 0) {
+    if (obj.value.length > 1) {
       let filtro: FiltroFormato = new FiltroFormato();
-      filtro.descricao_formato = obj.value
+      filtro.descricaoGr = obj.value
       filtro.paginacao = new Paginator();
 
 
@@ -140,7 +142,7 @@ export class AdicionarOrdemServicoComponent implements OnInit {
     let obj = evento.target as HTMLInputElement
     if (obj.value.length > 2) {
       let filtro: FiltroPapel = new FiltroPapel();
-      filtro.descricao = obj.value
+      filtro.descricaoGr = obj.value
       filtro.paginacao = new Paginator();
 
 

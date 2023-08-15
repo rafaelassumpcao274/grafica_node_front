@@ -38,8 +38,10 @@ export class AuthenticationService extends BaseClass {
       )
   }
 
-  setStorage(rememberMe:boolean){
-    this.storage.clear()
+  setStorage(rememberMe:boolean,clear?:boolean){
+    if(clear){
+      this.storage.clear()
+    }
     if(rememberMe){
       return new LocalStorageService(window.localStorage)
     }
@@ -58,7 +60,7 @@ export class AuthenticationService extends BaseClass {
     return this.httpClient.post<Token>(this.API_URL+'/auth/signin', usuario).pipe(
       tap((resposta:Token) => {
 
-      this.storage = this.setStorage(usuario.rememberMe)
+      this.storage = this.setStorage(usuario.rememberMe,true)
 
       if(!resposta.accessToken) return;
       this.storage.set('token', resposta);

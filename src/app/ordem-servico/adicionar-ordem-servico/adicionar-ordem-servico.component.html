@@ -104,10 +104,10 @@
           </div>
           <input
             type="text"
-            aria-label="descricao_formato"
-            name="descricao_formato"
-            id="descricao_formato"
-            formControlName="descricao_formato"
+            aria-label="descricao"
+            name="descricao"
+            id="descricao"
+            formControlName="descricao"
             class="form-control"
             style="border: 1px solid #ced4da"
             [matAutocomplete]="autoFormato"
@@ -120,9 +120,9 @@
             ></mat-progress-bar>
             <mat-option
               *ngFor="let result of listaFormato | async"
-              [value]="result.descricao_formato"
+              [value]="result.descricao"
             >
-              {{ result.descricao_formato }}
+              {{ result.descricao }}
             </mat-option>
           </mat-autocomplete>
         </div>
@@ -223,6 +223,11 @@
             id="num_end"
           />
         </div>
+
+        <app-acabamentos [acabamentos]="listaAcabamentos"  ></app-acabamentos>
+
+
+        
         <!-- <mat-form-field appearance="fill">
           <mat-label>Favorite food</mat-label>
           <mat-select>

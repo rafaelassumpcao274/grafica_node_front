@@ -55,7 +55,10 @@ export class AutoCompleteService extends BaseClass {
   }
 
   listarFormato(obj?: FiltroFormato) {
-    return this.httpClient.post<Formato[]>(this.API_URL + '/autoComplete/formato', obj, this.httpOptions)
+    if (obj) {
+      this.httpOptions.params = this.Params(obj)
+    }
+    return this.httpClient.get<Formato[]>(this.API_URL + '/autocomplete/formato',  this.httpOptions)
       .pipe(
         debounceTime(300),
         retry(0),
@@ -64,7 +67,10 @@ export class AutoCompleteService extends BaseClass {
   }
 
   listarPapel(obj?: FiltroPapel) {
-    return this.httpClient.post<Papel[]>(this.API_URL + '/autoComplete/papel', obj, this.httpOptions)
+    if (obj) {
+      this.httpOptions.params = this.Params(obj)
+    }
+    return this.httpClient.get<Papel[]>(this.API_URL + '/autocomplete/papel', this.httpOptions)
       .pipe(
         debounceTime(300),
         retry(0),

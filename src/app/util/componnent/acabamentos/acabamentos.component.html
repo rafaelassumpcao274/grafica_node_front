@@ -1,0 +1,8 @@
+<mat-form-field ngClass>
+  <mat-label>Acabamentos</mat-label>
+  <mat-select [formGroup]="_formAcabamentos" multiple >
+    <mat-option *ngFor="let acabamento of _listaAcabamentos" [value]="acabamento">{{acabamento.descricao}}</mat-option>
+  </mat-select>
+
+ <loading-matselect *ngIf="loading"></loading-matselect>
+</mat-form-field>

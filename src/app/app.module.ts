@@ -30,6 +30,9 @@ import { TokenInterceptor } from './service/interceptors/token.interceptor';
 import { LogadoComponent } from './login/logado/logado.component';
 import { LogarComponent } from './login/logar/logar.component';
 import { LoginModule } from './login/login.module';
+import { AcabamentosComponent } from './util/componnent/acabamentos/acabamentos.component';
+import { AutocompleteComponent } from './util/componnent/loading/autocomplete/autocomplete.component';
+import { AcabamentosModule } from './util/componnent/acabamentos/acabamentos.module';
 
 
 
@@ -47,11 +50,13 @@ import { LoginModule } from './login/login.module';
     OrdemServicoComponent,
     RegistroComponent,
     AdicionarOrdemServicoComponent,
+    AutocompleteComponent,
 
 
   ],
   imports: [
     LoginModule,
+    AcabamentosModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

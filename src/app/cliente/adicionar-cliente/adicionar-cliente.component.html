@@ -1,12 +1,12 @@
 <app-loading [loading]="loading"></app-loading>
 <div class="container">
-  <mat-card  class="mat-elevation-z8">
+  <mat-card class="mat-elevation-z8">
     <button mat-button matTooltip="Voltar" routerLink="/clientes">
       <mat-icon>chevron_left</mat-icon>
     </button>
   </mat-card>
   <mat-card class="mat-elevation-z8">
-    <form (ngSubmit)="onSubmit()">
+    <form  [formGroup]="formCliente" (ngSubmit)="onSubmit()">
 
       <mat-card-title class="card-title"> Cadastro de cliente </mat-card-title>
 
@@ -17,150 +17,89 @@
           <div class="row">
             <mat-form-field class="col-md-4" appearance="fill">
               <mat-label>Nome Empresa</mat-label>
-              <input
-                matInput
-                type="text"
-                name="nomeEmpresa"
-                id="nomeEmpresa"
-                formControlName="nomeEmpresa"
-              />
+              <input matInput type="text" name="nomeEmpresa" id="nomeEmpresa" formControlName="nomeEmpresa" />
             </mat-form-field>
 
             <mat-form-field class="col-md-4" appearance="fill">
               <mat-label>Razão Social</mat-label>
-              <input
-                matInput
-                type="text"
-                name="razaoSocial"
-                id="razaoSocial"
-                formControlName="razaoSocial"
-              />
+              <input matInput type="text" name="razaoSocial" id="razaoSocial" formControlName="razaoSocial" />
             </mat-form-field>
 
             <mat-form-field class="col-md-4" appearance="fill">
               <mat-label>E-mail</mat-label>
-              <input
-                matInput
-                type="text"
-                name="email"
-                id="email"
-                formControlName="email"
-              />
+              <input matInput type="text" name="email" id="email" formControlName="email" />
             </mat-form-field>
           </div>
 
           <div class="row">
             <mat-form-field class="col-md-3" appearance="fill">
               <mat-label>Cnpj</mat-label>
-              <input
-                matInput
-                type="text"
-                maxLength="14"
-                name="cnpj"
-                id="cnpj"
-                formControlName="cnpj"
-              />
+              <input matInput type="text" maxLength="14" name="cnpj" id="cnpj" formControlName="cnpj" />
             </mat-form-field>
 
             <mat-form-field class="col-md-4" appearance="fill">
               <mat-label>Contato</mat-label>
-              <input
-                matInput
-                type="text"
-                name="contato"
-                id="contato"
-                formControlName="contato"
-              />
+              <input matInput type="text" name="contato" id="contato" formControlName="contato" />
             </mat-form-field>
 
             <mat-form-field class="col-md-4" appearance="fill">
               <mat-label>Telefone</mat-label>
-              <input
-                matInput
-                type="text"
-                maxlength="14"
-                name="telefone"
-                id="telefone"
-                placeholder="(41)55555-1234"
-              />
+              <input matInput type="text" maxlength="14" name="telefone" id="telefone" placeholder="(41)55555-1234" />
             </mat-form-field>
+          </div>
+
+
+          <div class="row" [formGroup]="formEndereco">
+            <mat-form-field class="col-md-4" appearance="fill">
+              <mat-label>Endereco</mat-label>
+              <input matInput type="text" name="descricao_endereco" id="descricao_endereco"
+                formControlName="descricao" />
+            </mat-form-field>
+            <mat-form-field class="col-md-4" appearance="fill">
+              <mat-label>Cep</mat-label>
+              <input matInput type="text" name="cep" id="cep" maxlength="9" placeholder="99999-999"
+                formControlName="cep" (input)="autoCompleteCep($event)" />
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4" appearance="fill">
+              <mat-label>Numero</mat-label>
+              <input matInput type="number" name="numero" id="numero" maxlength="5" formControlName="numero" />
+            </mat-form-field>
+            <div class="row">
+              <mat-form-field class="col-md-4" appearance="fill">
+                <mat-label>Complemento </mat-label>
+                <input matInput type="text" name="complemento" id="complemento" formControlName="complemento" />
+              </mat-form-field>
+              <div class="col-md-4" [formGroup]="formBairro">
+                <mat-form-field appearance="fill">
+                  <mat-label>Bairro</mat-label>
+                  <input matInput type="text" name="descricao" id="descricao_bairro" formControlName="descricao" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3" [formGroup]="formCidade">
+                <mat-form-field appearance="fill">
+                  <mat-label>Cidade</mat-label>
+                  <input matInput type="text" name="descricao" id="descricao" formControlName="descricao" />
+                </mat-form-field>
+              </div>
+              <div class="col-md-3" [formGroup]="formUf">
+                <mat-form-field appearance="fill">
+                  <mat-label>Uf</mat-label>
+                  <input matInput type="text" name="descricao_uf" id="descricao_uf" formControlName="descricao" />
+                </mat-form-field>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div class="row" [formGroup]="formEndereco">
-          <mat-form-field class="col-md-4" appearance="fill">
-            <mat-label>Endereco</mat-label>
-            <input
-              matInput
-              type="text"
-              name="descricao_endereco"
-              id="descricao_endereco"
-              formControlName="descricao"
-            />
-          </mat-form-field>
-          <mat-form-field class="col-md-4" appearance="fill">
-            <mat-label>Cep</mat-label>
-            <input
-              matInput
-              type="text"
-              name="cep"
-              id="cep"
-              maxlength="9"
-              placeholder="99999-999"
-              formControlName="cep"
-              (input)="autoCompleteCep($event)"
-            />
-          </mat-form-field>
-
-          <div class="col-md-4" [formGroup]="formBairro">
-            <mat-form-field appearance="fill">
-              <mat-label>Bairro</mat-label>
-              <input
-                matInput
-                type="text"
-                name="descricao"
-                id="descricao_bairro"
-                formControlName="descricao"
-              />
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3" [formGroup]="formCidade">
-            <mat-form-field appearance="fill">
-              <mat-label>Cidade</mat-label>
-              <input
-                matInput
-                type="text"
-                name="descricao"
-                id="descricao"
-                formControlName="descricao"
-              />
-            </mat-form-field>
-          </div>
-          <div class="col-md-3" [formGroup]="formUf">
-            <mat-form-field appearance="fill">
-              <mat-label>Uf</mat-label>
-              <input
-                matInput
-                type="text"
-                name="descricao_uf"
-                id="descricao_uf"
-                formControlName="descricao"
-              />
-            </mat-form-field>
-          </div>
-        </div>
       </mat-card-content>
 
       <mat-card-actions align="end">
         <input type="submit" class="btn btn-primary mt-4" value="Salvar" />
-        <button
-          type="button"
-          *ngIf="id && id > 0"
-          (click)="excluir()"
-          class="btn btn-danger mt-4 ml-2"
-        >
+        <button type="button" *ngIf="id && id > 0" (click)="excluir()" class="btn btn-danger mt-4 ml-2">
           Excluir
         </button>
       </mat-card-actions>

@@ -63,6 +63,15 @@ export class ClienteService extends BaseClass {
       )
   }
 
+  update(cliente: Cliente): Observable<Cliente> {
+
+    return this.httpClient.put<Cliente>(this.API_URL+'/empresa',cliente,this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
   excluir(id:number): Observable<any> {
 
     return this.httpClient.delete<any>(this.API_URL+'/empresa/'+id,this.httpOptions)

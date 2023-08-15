@@ -159,15 +159,28 @@ export class AdicionarClienteComponent implements OnInit {
     let cliente: Cliente = this.obterCliente();
 
     this.loading = true;
+    if(this.id){
+      this.service.update(cliente).subscribe((msg) => {
+        this.info.showSuccess("atualizado com sucesso !! ");
+        console.info(msg);
+        this.loading = false;
+      }, (error) => {
+        this.loading = false;
+        this.info.showMessageError(error)
+      });
 
-    this.service.salvar(cliente).subscribe((msg) => {
-      this.info.showSuccess("Salvo com sucesso !! ");
-      console.info(msg);
-      this.loading = false;
-    }, (error) => {
-      this.loading = false;
-      this.info.showMessageError(error)
-    });
+    }else{
+      this.service.salvar(cliente).subscribe((msg) => {
+        this.info.showSuccess("Salvo com sucesso !! ");
+        console.info(msg);
+        this.loading = false;
+      }, (error) => {
+        this.loading = false;
+        this.info.showMessageError(error)
+      });
+    }
+
+   
 
     // Usar o método reset para limpar os controles na tela
     //this.formCliente.reset(new Cliente());

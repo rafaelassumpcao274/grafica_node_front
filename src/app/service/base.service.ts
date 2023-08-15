@@ -29,6 +29,7 @@ export class BaseClass{
     if (error.error instanceof ErrorEvent) {
       // Erro ocorreu no lado do cliente
       errorMessage = error.error.message;
+      
     } else {
       // Erro ocorreu no lado do servidor
 
@@ -36,7 +37,6 @@ export class BaseClass{
 
         case 403:{
           errorMessage = "Usuario não Autenticado !!!"
-          
           break
         }
         case 404: {
@@ -48,12 +48,13 @@ export class BaseClass{
           break;
         }
       }
-
+     
       // errorMessage = error.error ?? error.message;
       // errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
 
     }
       return throwError(errorMessage);
   };
+
 
 }
