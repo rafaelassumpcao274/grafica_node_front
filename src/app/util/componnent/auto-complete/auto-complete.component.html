@@ -1,0 +1,26 @@
+<div class="input-group mb-3" >
+    <div class="input-group-prepend">
+      <span class="input-group-text">{{label}}</span>
+    </div>
+    <!-- <mat-form-field appearance="outline"> -->
+        <input
+        type="text"
+        matInput
+        [(ngModel)]="this.modelo"
+        (ngModelChange)="insertValueForm()"
+        class="form-control"
+        style="border: 1px solid #ced4da"
+        [matAutocomplete]="autoComplete"
+        (input)="autoCompleteService($event)"
+      />
+
+    <mat-autocomplete #autoComplete="matAutocomplete"   [displayWith]="displayFn.bind(this)">
+      <mat-option
+        *ngFor="let result of lista| async"
+        [value]="result"
+      >
+        {{displayFn(result)}}
+      </mat-option>
+    </mat-autocomplete>
+    <!-- </mat-form-field> -->
+  </div>

@@ -15,34 +15,9 @@
         <!-- <div class="col"><img class="rounded " src="imagens/logo.jpg" height="70" width="150"></div> -->
       </nav>
       <div class="shadow p-3 mb-5 bg-white rounded">
-        <div class="input-group mb-3" formGroupName="cliente">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Cliente</span>
-          </div>
-          <!-- <mat-form-field appearance="outline"> -->
+        <app-auto-complete format="id : nomeEmpresa" [service]="clienteService" label ="Cliente" atributo="empresa">
 
-
-              <input
-              type="text"
-              aria-label="Number"
-              matInput
-              class="form-control"
-              style="border: 1px solid #ced4da"
-              formControlName="nomeEmpresa"
-              [matAutocomplete]="autoCliente"
-              (input)="autoCompleteCliente($event)"
-            />
-
-          <mat-autocomplete #autoCliente="matAutocomplete">
-            <mat-option
-              *ngFor="let result of listaCliente | async"
-              [value]="result.nomeEmpresa"
-            >
-              {{ result.nomeEmpresa }}
-            </mat-option>
-          </mat-autocomplete>
-          <!-- </mat-form-field> -->
-        </div>
+        </app-auto-complete>
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
@@ -98,7 +73,11 @@
         <div class="shadow-sm p-3 mb-5 rounded">
           <h5 class="text-center">Papel</h5>
         </div>
-        <div class="input-group mb-3" formGroupName="formato">
+
+        <app-auto-complete format="descricao" [service]="formatoService" label ="Formato" atributo="formato" [limiteBusca]="1">
+
+        </app-auto-complete>
+        <!-- <div class="input-group mb-3" formGroupName="formato">
           <div class="input-group-prepend">
             <label class="input-group-text">Formato</label>
           </div>
@@ -125,7 +104,7 @@
               {{ result.descricao }}
             </mat-option>
           </mat-autocomplete>
-        </div>
+        </div> -->
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default"
@@ -143,33 +122,9 @@
           />
         </div>
 
-        <div class="input-group mb-3" formGroupName="papel">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="papel">Papel</label>
-          </div>
-          <input
-            type="text"
-            name="descricao"
-            id="descricao"
-            formControlName="descricao"
-            class="form-control"
-            style="border: 1px solid #ced4da"
-            [matAutocomplete]="autoPapel"
-            (input)="autoCompletePapel($event)"
-          />
-          <mat-autocomplete #autoPapel="matAutocomplete">
-            <mat-progress-bar
+        <app-auto-complete format="descricao" [service]="papelService" label ="Papel" atributo="papel" >
 
-              mode="indeterminate"
-            ></mat-progress-bar>
-            <mat-option
-              *ngFor="let result of listaPapel | async"
-              [value]="result.descricao"
-            >
-              {{ result.descricao }}
-            </mat-option>
-          </mat-autocomplete>
-        </div>
+        </app-auto-complete>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default"

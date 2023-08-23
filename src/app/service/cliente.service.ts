@@ -1,17 +1,19 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError, Observable, retry, throwError } from 'rxjs';
+import { catchError, debounceTime, Observable, retry, throwError } from 'rxjs';
 import { Cliente } from 'src/models/cliente';
 import { FiltroCliente } from 'src/models/filtros/filtro-cliente';
 import { ListaOrdemDeServico } from 'src/models/listaOrdemServico';
 import { Paginator } from 'src/models/Paginator';
 import { BaseClass } from './base.service';
+import { Iservice } from './interface/iservice';
+import { FiltroGeral } from 'src/models/filtros/filtro-geral';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClienteService extends BaseClass {
+export class ClienteService extends BaseClass implements Iservice{
 
 
   constructor(private httpClient: HttpClient,
@@ -23,6 +25,20 @@ export class ClienteService extends BaseClass {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     params:new HttpParams()
+  }
+
+  listarAutoComplete<Cliente>(evento:any): Observable<Array<Cliente>>{
+      let filtro: FiltroGeral = new FiltroGeral;
+      if (evento) {
+        filtro.descricaoGr = evento.value
+        this.httpOptions.params = this.Params(filtro)
+      }
+      return this.httpClient.get<Cliente[]>(this.API_URL + '/autocomplete/empresa', this.httpOptions)
+        .pipe(
+          debounceTime(300),
+          retry(0),
+          catchError(this.handleError)
+        )
   }
 
   obterPorId(id:number) {

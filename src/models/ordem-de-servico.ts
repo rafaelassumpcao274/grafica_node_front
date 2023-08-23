@@ -24,7 +24,7 @@ export class OrdemDeServico {
       return new FormGroup({
         id:new FormControl(),
         createdAt:new FormControl(),
-        cliente:Cliente.formCliente(),
+        empresa:Cliente.formCliente(),
         material:new FormControl(),
         papel:Papel.getForm(),
         cor_frente: new FormControl(),

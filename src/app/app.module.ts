@@ -33,6 +33,7 @@ import { LoginModule } from './login/login.module';
 import { AcabamentosComponent } from './util/componnent/acabamentos/acabamentos.component';
 import { AutocompleteComponent } from './util/componnent/loading/autocomplete/autocomplete.component';
 import { AcabamentosModule } from './util/componnent/acabamentos/acabamentos.module';
+import { AutoCompleteComponent } from './util/componnent/auto-complete/auto-complete.component';
 
 
 
@@ -51,6 +52,7 @@ import { AcabamentosModule } from './util/componnent/acabamentos/acabamentos.mod
     RegistroComponent,
     AdicionarOrdemServicoComponent,
     AutocompleteComponent,
+    AutoCompleteComponent,
 
 
   ],

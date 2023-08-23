@@ -5,8 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AcabamentosService } from 'src/app/service/acabamentos.service';
 import { AutoCompleteService } from 'src/app/service/auto-complete.service';
+import { ClienteService } from 'src/app/service/cliente.service';
 import { FormatoService } from 'src/app/service/formato.service';
 import { OrdemServicoService } from 'src/app/service/ordem-servico.service';
+import { PapelService } from 'src/app/service/papel.service';
 import { SnackBars } from 'src/app/util/snack-bars';
 import { Acabamentos } from 'src/models/acabamentos';
 import { Cliente } from 'src/models/cliente';
@@ -48,6 +50,9 @@ export class AdicionarOrdemServicoComponent implements OnInit {
 
   constructor(private service: OrdemServicoService,
     private autoCompleteService: AutoCompleteService,
+    public clienteService:ClienteService,
+    public formatoService:FormatoService,
+    public papelService:PapelService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar) { }
 
@@ -86,8 +91,6 @@ export class AdicionarOrdemServicoComponent implements OnInit {
 
   salvar() {
 
-
-
     this.service.salvar(this.obterOrdemServico()).subscribe(msg => {
       this.info.showSuccess("Salvo com sucesso !! ");
       console.info(msg);
@@ -100,6 +103,10 @@ export class AdicionarOrdemServicoComponent implements OnInit {
 
 
   }
+  displayFn(empresa: Cliente): string {
+    return empresa && empresa.nomeEmpresa ? empresa.nomeEmpresa :'';
+  }
+
 
 
   obterOrdemServico(): OrdemDeServico {
@@ -130,7 +137,6 @@ export class AdicionarOrdemServicoComponent implements OnInit {
       let filtro: FiltroFormato = new FiltroFormato();
       filtro.descricaoGr = obj.value
       filtro.paginacao = new Paginator();
-
 
       this.listaFormato = this.autoCompleteService.listarFormato(filtro);
 
