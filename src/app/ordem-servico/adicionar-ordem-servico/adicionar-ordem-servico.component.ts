@@ -103,9 +103,7 @@ export class AdicionarOrdemServicoComponent implements OnInit {
 
 
   }
-  displayFn(empresa: Cliente): string {
-    return empresa && empresa.nomeEmpresa ? empresa.nomeEmpresa :'';
-  }
+
 
 
 
@@ -118,45 +116,6 @@ export class AdicionarOrdemServicoComponent implements OnInit {
 
 
 
-  autoCompleteCliente(evento: any) {
-    let obj = evento.target as HTMLInputElement
-    if (obj.value.length > 2) {
-      let filtro: FiltroCliente = new FiltroCliente();
-      filtro.nome_empresa = obj.value
-      filtro.paginacao = new Paginator();
-            this.listaCliente = this.autoCompleteService.listarCliente(filtro);
-
-
-    }
-  }
-
-
-  autoCompleteFormato(evento: any) {
-    let obj = evento.target as HTMLInputElement
-    if (obj.value.length > 1) {
-      let filtro: FiltroFormato = new FiltroFormato();
-      filtro.descricaoGr = obj.value
-      filtro.paginacao = new Paginator();
-
-      this.listaFormato = this.autoCompleteService.listarFormato(filtro);
-
-    }
-
-  }
-
-  autoCompletePapel(evento: any) {
-    let obj = evento.target as HTMLInputElement
-    if (obj.value.length > 2) {
-      let filtro: FiltroPapel = new FiltroPapel();
-      filtro.descricaoGr = obj.value
-      filtro.paginacao = new Paginator();
-
-
-      this.listaPapel = this.autoCompleteService.listarPapel(filtro);
-
-    }
-
-  }
 
 }
 

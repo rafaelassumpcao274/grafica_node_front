@@ -56,9 +56,6 @@ modelo: any ;
     }
   ngOnInit(): void {
     this.form = this.rootFormGroup.control as FormGroup;
-    this.form.valueChanges.subscribe(data => {
-      console.log('Form changes', data)
-    })
 
   }
   

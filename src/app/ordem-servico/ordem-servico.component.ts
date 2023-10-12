@@ -50,14 +50,8 @@ export class OrdemServicoComponent implements OnInit {
     this.loading = true
     this.service.listarPaginado(this.pagina).subscribe((obj) => {
 
-      if (obj) {
-        this.pagina = obj as Paginator;
-      }
-
-
-      if (this.pagina?.lista) {
-        this.listaOrdemServico = obj.lista as OrdemDeServico[];
-      }
+      this.listaOrdemServico = obj as OrdemDeServico[] ;
+      
       this.loading = false;
     }, (error) => {
       this.loading = false;

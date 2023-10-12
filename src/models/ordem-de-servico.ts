@@ -2,6 +2,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { Cliente } from "./cliente";
 import { Formato } from "./formato";
 import { Papel } from "./papel";
+import { Acabamentos } from "./acabamentos";
 
 export class OrdemDeServico {
 
@@ -17,7 +18,7 @@ export class OrdemDeServico {
     numeracao_ini?:number;
     numeracao_final?:number;
     observacao?: string;
-    acabamento?: string;
+    listaAcabamentos?: Acabamentos;
 
 
     static getForm(){
@@ -34,7 +35,7 @@ export class OrdemDeServico {
         numeracao_ini:new FormControl(),
         numeracao_final:new FormControl(),
         observacao: new FormControl(),
-        acabamento: new FormControl(),
+        listaAcabamentos: Acabamentos.formAcabamentos(),
       });
     }
 
