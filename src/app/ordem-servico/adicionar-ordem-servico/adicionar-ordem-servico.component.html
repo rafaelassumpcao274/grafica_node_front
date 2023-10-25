@@ -7,7 +7,7 @@
           <p>
             {{
               this.form.get("createdAt")?.value
-                ? this.form.get("createdAt")?.value
+                ? (this.form.get("createdAt")?.value | date:"dd/MM/YY")
                 : (data | date: "dd/MM/YY")
             }}
           </p>

@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component,  EventEmitter,  Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -8,14 +8,14 @@ import { Acabamentos } from 'src/models/acabamentos';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgForOf, NgIf } from '@angular/common';
 import { MatselectComponent } from "../loading/matselect/matselect.component";
-import { EventEmitter } from 'stream';
+
 
 @Component({
     selector: 'app-acabamentos',
     templateUrl: './acabamentos.component.html',
     styleUrls: ['./acabamentos.component.scss'],
     standalone: true,
-    imports: [MatFormFieldModule, MatSelectModule, MatProgressSpinnerModule, NgIf, NgForOf, FormsModule, ReactiveFormsModule, MatselectComponent, EventEmitter]
+    imports: [MatFormFieldModule, MatSelectModule, MatProgressSpinnerModule, NgIf, NgForOf, FormsModule, ReactiveFormsModule, MatselectComponent, ]
 })
 export class AcabamentosComponent extends BaseClass {
   loading: boolean = false;

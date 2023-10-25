@@ -65,7 +65,6 @@ export class AdicionarOrdemServicoComponent implements OnInit {
     this.obterform()
     if (this.id > 0) {
       this.service.obterPorId(this.id).subscribe((info) => {
-        console.log(info)
         if (info) {
           this.setarForm(info as OrdemDeServico)
         }
