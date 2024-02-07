@@ -46,10 +46,10 @@ export class AcabamentosComponent extends BaseClass {
   obterTodosAcabamentos() {
     this.loading = true
 
-    this._acabamentoService.listarPaginado().subscribe((info) => {
+    this._acabamentoService.listarPaginado().subscribe((info: Acabamentos[]) => {
       this.listaAcabamentos = info as Acabamentos[];
       this.loading = false;
-    }, (error) => {
+    }, (error: any) => {
       this.loading = false;
       this.handleError(error);
       return null;
