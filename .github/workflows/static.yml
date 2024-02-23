@@ -33,9 +33,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '20.9'
+          
       - name: Install Dependencies
         run: npm install
-
       - name: build-front
         run: ng build --configuration=production --output-path docs
       - name: Checkout
