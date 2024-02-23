@@ -21,9 +21,13 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 jobs:
-  my_job:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     name: deploy to staging
-    runs-on: ubuntu-18.04
+
     steps:
       - name: Setup Node
         uses: actions/setup-node@v1
@@ -34,14 +38,6 @@ jobs:
 
       - name: build-front
         run: ng build --configuration=production --output-path docs --base-href /grafica_node_front/
-jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Pages
@@ -50,7 +46,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: '.'
+          path: './docs'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
