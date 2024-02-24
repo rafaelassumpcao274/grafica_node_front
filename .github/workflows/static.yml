@@ -33,13 +33,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '20.9'
-      - name: back path
-        run: cd ..          
+
       - name: Install Dependencies
-        run: npm install
+        run: npm install /home/runner/work/grafica_node_front/
 
       - name: build-front
-        run: ng build --configuration=production --output-path docs
+        run: ng build /home/runner/work/grafica_node_front/ --configuration=production --output-path docs
 
       - name: Checkout
         uses: actions/checkout@v4
