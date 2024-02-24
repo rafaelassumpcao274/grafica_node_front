@@ -13,14 +13,17 @@ import { UsuarioAutenticadoGuard } from './service/guards/usuario-autenticado.gu
 import { UsuarioNaoAutenticadoGuard } from './service/guards/usuario-nao-autenticado.guard';
 
 const routes: Routes = [
-    { 'path':'', component:HomeComponent},
-    { 'path':'ces', component:CesComponent,canActivate: [UsuarioAutenticadoGuard]},
-    { 'path':'clientes', component:ClienteComponent,canActivate: [UsuarioAutenticadoGuard]},
-    { 'path':'cliente', component:AdicionarClienteComponent,canActivate: [UsuarioAutenticadoGuard]},
-    { 'path':'cliente/:id', component:AdicionarClienteComponent,canActivate: [UsuarioAutenticadoGuard]},
-    { 'path':'ordem-servico/:id', component:AdicionarOrdemServicoComponent,canActivate: [UsuarioAutenticadoGuard]},
-    { 'path':'ordens-servicos', component:OrdemServicoComponent,canActivate: [UsuarioAutenticadoGuard]},
-    { 'path':'registro', component:RegistroComponent}
+  { 'path': '', component: HomeComponent },
+  { 'path': 'ces', component: CesComponent,  },
+  { 'path': 'clientes', component: ClienteComponent, canActivate: [UsuarioAutenticadoGuard] },
+  { 'path': 'cliente', component: AdicionarClienteComponent, canActivate: [UsuarioAutenticadoGuard] },
+  { 'path': 'cliente/:id', component: AdicionarClienteComponent, canActivate: [UsuarioAutenticadoGuard] },
+  { 'path': 'ordem-servico/:id', component: AdicionarOrdemServicoComponent, canActivate: [UsuarioAutenticadoGuard] },
+  { 'path': 'ordens-servicos', component: OrdemServicoComponent, canActivate: [UsuarioAutenticadoGuard] },
+  { 'path': 'registro', component: RegistroComponent },
+  // Rota padrão para redirecionar para a home se nenhum caminho corresponder
+  { 'path': '**', redirectTo: '' }
+
 
 ];
 
