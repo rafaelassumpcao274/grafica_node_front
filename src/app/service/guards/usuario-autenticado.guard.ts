@@ -11,6 +11,7 @@ export class UsuarioAutenticadoGuard {
       if (this.usuarioService.logado()) {
         return true;
       }
+      
       return false;
     }
 }
