@@ -40,7 +40,7 @@ jobs:
       # - name: build-front
       #   run: npm run build  /home/runner/work/grafica_node_front/ --configuration=production --output-path docs
       - name: build-front
-        run:  echo ls -l
+        run:  ls -l
 
       - name: Checkout
         uses: actions/checkout@v4
