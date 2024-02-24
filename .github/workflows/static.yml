@@ -39,6 +39,8 @@ jobs:
 
       # - name: build-front
       #   run: npm run build  /home/runner/work/grafica_node_front/ --configuration=production --output-path docs
+      - name: build-front
+        run:  echo ls -l
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -48,7 +50,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: '../docs'
+          path: './docs'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
