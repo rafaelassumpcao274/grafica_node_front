@@ -35,7 +35,7 @@ jobs:
           node-version: '20.9'
 
       - name: Install Dependencies
-        run: npm install /home/runner/work/grafica_node_front/
+        run: ls -l
 
       - name: build-front
         run: ng build /home/runner/work/grafica_node_front/ --configuration=production --output-path docs
