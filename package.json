@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
+    "buildGit": "ng build --configuration=production --output-path docs --base-href /grafica_node_front/",
     "watch": "ng build --watch --configuration development",
     "postinstall": "ng build ",
     "test": "ng test"

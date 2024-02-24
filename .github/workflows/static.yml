@@ -34,11 +34,11 @@ jobs:
         with:
           node-version: '20.9'
 
-      - name: Install Dependencies
-        run: ls -l
+      # - name: Install Dependencies
+      #   run: ls -l
 
-      - name: build-front
-        run: ng build /home/runner/work/grafica_node_front/ --configuration=production --output-path docs
+      # - name: build-front
+      #   run: npm run build  /home/runner/work/grafica_node_front/ --configuration=production --output-path docs
 
       - name: Checkout
         uses: actions/checkout@v4
