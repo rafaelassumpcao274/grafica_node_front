@@ -34,16 +34,20 @@ jobs:
         with:
           node-version: '20.9'
 
-      # - name: Install Dependencies
-      #   run: ls -l
-
-      # - name: build-front
-      #   run: npm run build  /home/runner/work/grafica_node_front/ --configuration=production --output-path docs
-      - name: build-front
-        run:  ls -l
-
       - name: Checkout
         uses: actions/checkout@v4
+
+      - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-    
+      - name: Build
+        run: |
+          npm install
+          npm run deployGit
+          
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
