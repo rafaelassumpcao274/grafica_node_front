@@ -1,200 +1,118 @@
 <mat-card>
-  <div class="container-fluid">
+  <mat-card-content>
     <form [formGroup]="form" (submit)="salvar()">
-      <nav class="navbar navbar-light bg-light">
-        <div class="col">
-          <h6>Data pedido</h6>
-          <p>
-            {{
-              this.form.get("createdAt")?.value
+      <mat-stepper #stepper>
+        <mat-step>
+          <ng-template matStepLabel>Info</ng-template>
+          <nav class="navbar navbar-light bg-light">
+            <div class="col">
+              <h6>Data pedido</h6>
+              <p>
+                {{
+                this.form.get("createdAt")?.value
                 ? (this.form.get("createdAt")?.value | date:"dd/MM/YY")
                 : (data | date: "dd/MM/YY")
-            }}
-          </p>
-        </div>
-        <!-- <div class="col"><img class="rounded " src="imagens/logo.jpg" height="70" width="150"></div> -->
-      </nav>
-      <div class="shadow p-3 mb-5 bg-white rounded">
-        <app-auto-complete format="id : nomeEmpresa" [service]="clienteService" label ="Cliente" atributo="empresa">
+                }}
+              </p>
+            </div>
+            <!-- <div class="col"><img class="rounded " src="imagens/logo.jpg" height="70" width="150"></div> -->
+          </nav>
+          <div class="shadow p-3 mb-5 bg-white rounded">
+            <app-auto-complete format="id : nomeEmpresa" [service]="clienteService" label="Cliente" atributo="empresa">
 
-        </app-auto-complete>
+            </app-auto-complete>
 
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Material</span>
-          </div>
-          <input
-            type="text"
-            aria-label="Material"
-            class="form-control"
-            formControlName="material"
-            name="Material"
-            id="Material"
-            required
-          />
-        </div>
-      </div>
-
-      <div class="shadow p-3 mb-5 bg-white rounded">
-        <div class="shadow-sm p-3 mb-5 rounded">
-          <h6 class="text-center">Cor:</h6>
-        </div>
-
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Frente</span>
-          </div>
-          <input
-            type="text"
-            aria-label="Material"
-            class="form-control"
-            formControlName="cor_frente"
-            name="cor_frente"
-            id="cor_frente"
-            required
-          />
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Verso</span>
-          </div>
-          <input
-            type="text"
-            aria-label="Material"
-            class="form-control"
-            formControlName="cor_verso"
-            name="cor_verso"
-            id="cor_verso"
-            required
-          />
-        </div>
-      </div>
-      <div class="shadow p-3 mb-5 bg-white rounded">
-        <div class="shadow-sm p-3 mb-5 rounded">
-          <h5 class="text-center">Papel</h5>
-        </div>
-
-        <app-auto-complete format="descricao" [service]="formatoService" label ="Formato" atributo="formato" [limiteBusca]="1">
-
-        </app-auto-complete>
-        <!-- <div class="input-group mb-3" formGroupName="formato">
-          <div class="input-group-prepend">
-            <label class="input-group-text">Formato</label>
-          </div>
-          <input
-            type="text"
-            aria-label="descricao"
-            name="descricao"
-            id="descricao"
-            formControlName="descricao"
-            class="form-control"
-            style="border: 1px solid #ced4da"
-            [matAutocomplete]="autoFormato"
-            (input)="autoCompleteFormato($event)"
-          />
-          <mat-autocomplete #autoFormato="matAutocomplete">
-            <mat-progress-bar
-
-              mode="indeterminate"
-            ></mat-progress-bar>
-            <mat-option
-              *ngFor="let result of listaFormato | async"
-              [value]="result.descricao"
-            >
-              {{ result.descricao }}
-            </mat-option>
-          </mat-autocomplete>
-        </div> -->
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default"
-              >Quantidade de folhas:</span
-            >
-          </div>
-          <input
-            type="number"
-            class="form-control"
-            aria-label="Quantidade de folhas "
-            name="quantidade_folhas"
-            id="quantidade_folhas"
-            formControlName="quantidade_folhas"
-            aria-describedby="inputGroup-sizing-default"
-          />
-        </div>
-
-        <app-auto-complete format="descricao" [service]="papelService" label ="Papel" atributo="papel" >
-
-        </app-auto-complete>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default"
-              >Obs:</span
-            >
-          </div>
-          <input
-            type="text"
-            class="form-control"
-            aria-label="Observação"
-            formControlName="observacao"
-            aria-describedby="input_observacao"
-            name="obs"
-          />
-        </div>
-      </div>
-
-      <div class="shadow p-3 mb-5 bg-white rounded">
-        <div class="shadow-sm p-3 mb-5 rounded">
-          <h5 class="text-center">Acabamentos</h5>
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <input
-                type="checkbox"
-                aria-label="Checkbox for following text input"
-                id="numeracao"
-                name="numeracao"
-              />
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Material</span>
+              </div>
+              <input type="text" aria-label="Material" class="form-control" formControlName="material" name="Material"
+                id="Material" required />
             </div>
           </div>
+          <div>
 
-          <div class="input-group-prepend">
-            <span class="input-group-text">Numeração</span>
+
+            <button mat-button matStepperNext>Next</button>
           </div>
-          <input
-            type="number"
-            aria-label="num_ini"
-            class="form-control"
-            placeholder="Inicial"
-            name="num_ini"
-            id="num_ini"
-          />
-          <input
-            type="number"
-            aria-label="num_end"
-            class="form-control"
-            placeholder="Final"
-            name="num_end"
-            id="num_end"
-          />
-        </div>
 
-        <app-acabamentos ></app-acabamentos>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Cor</ng-template>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Frente</span>
+            </div>
+            <input type="text" aria-label="Material" class="form-control" formControlName="cor_frente" name="cor_frente"
+              id="cor_frente" required />
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Verso</span>
+            </div>
+            <input type="text" aria-label="Material" class="form-control" formControlName="cor_verso" name="cor_verso"
+              id="cor_verso" required />
+          </div>
+          <button mat-button matStepperNext>Next</button>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Papel</ng-template>
+
+          <app-auto-complete format="descricao" [service]="formatoService" label="Formato" atributo="formato"
+            [limiteBusca]="1">
+
+          </app-auto-complete>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">Quantidade de folhas:</span>
+            </div>
+            <input type="number" class="form-control" aria-label="Quantidade de folhas " name="quantidade_folhas"
+              id="quantidade_folhas" formControlName="quantidade_folhas" aria-describedby="inputGroup-sizing-default" />
+          </div>
+
+          <app-auto-complete format="descricao" [service]="papelService" label="Papel" atributo="papel">
+
+          </app-auto-complete>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">Obs:</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Observação" formControlName="observacao"
+              aria-describedby="input_observacao" name="obs" />
+          </div>
+
+          <button mat-button matStepperNext>Next</button>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Acabamentos</ng-template>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <input type="checkbox" aria-label="Checkbox for following text input" id="numeracao" name="numeracao" />
+              </div>
+            </div>
+
+            <div class="input-group-prepend">
+              <span class="input-group-text">Numeração</span>
+            </div>
+            <input type="number" aria-label="num_ini" class="form-control" placeholder="Inicial" name="num_ini"
+              id="num_ini" />
+            <input type="number" aria-label="num_end" class="form-control" placeholder="Final" name="num_end"
+              id="num_end" />
+          </div>
+
+          <div class="row">
+            <app-acabamentos-chips class="col-md-12"  ></app-acabamentos-chips>
+          </div>
 
 
-        
-        <!-- <mat-form-field appearance="fill">
-          <mat-label>Favorite food</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{food.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field> -->
-      </div>
-      <mat-card class="mat-elevation-z8">
-        <button type="submit" class="btn btn-outline-primary">Concluir</button>
-      </mat-card>
+          <button type="submit" class="btn btn-outline-primary">Concluir</button>
+        </mat-step>
+      </mat-stepper>
     </form>
-  </div>
+  </mat-card-content>
+   
 </mat-card>

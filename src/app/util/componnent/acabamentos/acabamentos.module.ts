@@ -1,9 +1,8 @@
-import { EventEmitter, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AcabamentosComponent } from './acabamentos.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgModule } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatselectModule } from '../loading/matselect/matselect.module';
+import { AcabamentosComponent } from './acabamentos.component';
 
 
 

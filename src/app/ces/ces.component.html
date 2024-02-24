@@ -11,8 +11,9 @@
     </div>
 </div>
 
-
-<div class="container" *ngIf="mes > 0">
-    <app-tabela-ces [mesEscolhido]=mes>
-    </app-tabela-ces>
-</div>
+@if (mes > 0) {
+    <div class="container" >
+        <app-tabela-ces [mesEscolhido]=mes>
+        </app-tabela-ces>
+    </div>
+}

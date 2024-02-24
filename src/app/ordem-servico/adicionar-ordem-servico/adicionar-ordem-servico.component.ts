@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AcabamentosService } from 'src/app/service/acabamentos.service';
 import { AutoCompleteService } from 'src/app/service/auto-complete.service';
 import { ClienteService } from 'src/app/service/cliente.service';
 import { FormatoService } from 'src/app/service/formato.service';
 import { OrdemServicoService } from 'src/app/service/ordem-servico.service';
 import { PapelService } from 'src/app/service/papel.service';
+import { AcabamentosChipsComponent } from 'src/app/util/componnent/acabamentos-chips/acabamentos-chips.component';
 import { SnackBars } from 'src/app/util/snack-bars';
 import { Acabamentos } from 'src/models/acabamentos';
 import { Cliente } from 'src/models/cliente';
-import { FiltroCliente } from 'src/models/filtros/filtro-cliente';
-import { FiltroFormato } from 'src/models/filtros/filtro-formato';
-import { FiltroPapel } from 'src/models/filtros/filtro-papel';
 import { Formato } from 'src/models/formato';
 import { OrdemDeServico } from 'src/models/ordem-de-servico';
 import { Paginator } from 'src/models/Paginator';
@@ -23,7 +20,7 @@ import { Papel } from 'src/models/papel';
 @Component({
   selector: 'app-adicionar-ordem-servico',
   templateUrl: './adicionar-ordem-servico.component.html',
-  styleUrls: ['./adicionar-ordem-servico.component.scss']
+  styleUrls: ['./adicionar-ordem-servico.component.scss'],
 })
 export class AdicionarOrdemServicoComponent implements OnInit {
 
