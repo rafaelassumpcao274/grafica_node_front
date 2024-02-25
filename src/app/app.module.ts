@@ -28,6 +28,7 @@ import { AcabamentosModule } from './util/componnent/acabamentos/acabamentos.mod
 import { AutoCompleteComponent } from './util/componnent/auto-complete/auto-complete.component';
 import { AutocompleteComponent } from './util/componnent/loading/autocomplete/autocomplete.component';
 import { AcabamentosChipsComponent } from './util/componnent/acabamentos-chips/acabamentos-chips.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -61,7 +62,8 @@ import { AcabamentosChipsComponent } from './util/componnent/acabamentos-chips/a
     MaterialExampleModule,
     FormsModule,
     ReactiveFormsModule,
-    AcabamentosChipsComponent
+    AcabamentosChipsComponent,
+    RouterModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]

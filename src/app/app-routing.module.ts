@@ -12,13 +12,13 @@ import { UsuarioAutenticadoGuard } from './service/guards/usuario-autenticado.gu
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'ces', component: CesComponent},
-  { path: 'clientes', component: ClienteComponent, canActivate: [UsuarioAutenticadoGuard] },
-  { path: 'cliente', component: AdicionarClienteComponent, canActivate: [UsuarioAutenticadoGuard] },
-  { path: 'cliente/:id', component: AdicionarClienteComponent, canActivate: [UsuarioAutenticadoGuard] },
-  { path: 'ordem-servico/:id', component: AdicionarOrdemServicoComponent, canActivate: [UsuarioAutenticadoGuard] },
-  { path: 'ordens-servicos', component: OrdemServicoComponent, canActivate: [UsuarioAutenticadoGuard] },
+  { path: 'clientes', component: ClienteComponent },
+  { path: 'cliente', component: AdicionarClienteComponent },
+  { path: 'cliente/:id', component: AdicionarClienteComponent },
+  { path: 'ordem-servico/:id', component: AdicionarOrdemServicoComponent },
+  { path: 'ordens-servicos', component: OrdemServicoComponent },
   { path: 'registro', component: RegistroComponent },
-  // { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' }
 
 
 ];
