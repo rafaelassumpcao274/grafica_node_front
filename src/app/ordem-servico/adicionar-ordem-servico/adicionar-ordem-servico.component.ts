@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -30,7 +30,7 @@ export class AdicionarOrdemServicoComponent implements OnInit {
 
   listaOrdemServico: OrdemDeServico[] = [];
 
-  listaAcabamentos:Acabamentos[] = [];
+  listaAcabamentos: Acabamentos[] = [];
 
 
   listaCliente: Observable<Cliente[]> | undefined;
@@ -47,9 +47,9 @@ export class AdicionarOrdemServicoComponent implements OnInit {
 
   constructor(private service: OrdemServicoService,
     private autoCompleteService: AutoCompleteService,
-    public clienteService:ClienteService,
-    public formatoService:FormatoService,
-    public papelService:PapelService,
+    public clienteService: ClienteService,
+    public formatoService: FormatoService,
+    public papelService: PapelService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar) { }
 
@@ -100,7 +100,9 @@ export class AdicionarOrdemServicoComponent implements OnInit {
 
   }
 
-
+  setarAcabamentos(event: FormControl<Acabamentos[]>) {
+    this.form.controls["listaAcabamentos"].patchValue(event)
+  }
 
 
   obterOrdemServico(): OrdemDeServico {

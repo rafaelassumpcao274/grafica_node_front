@@ -35,13 +35,13 @@ export class AcabamentosChipsComponent extends BaseClass implements OnInit {
 
   @Input() tiposChip:TypeChipsEnum | undefined;
 
-  @Input() listaAcabamentosAtual: Array<Acabamentos> = []
-  @Output() changeListaAcabamentosAtual: EventEmitter<Array<Acabamentos>> = new EventEmitter()
+  @Input() listaAcabamentosAtual: Acabamentos[] = []
+  @Output() listaAcabamentosAtualChange: EventEmitter<Acabamentos[]> = new EventEmitter<Acabamentos[]>()
 
-  @Input() listaAcabamentosForm: FormControl = new FormControl("")
-  @Output() changelistaAcabamentosForm = new EventEmitter<FormControl>()
+  @Output() changelistaAcabamentosForm = new EventEmitter<FormControl<Acabamentos[]>>()
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
+  listaAcabamentosForm: FormControl<Acabamentos[]| null>= new FormControl<Acabamentos[]>(new Array<Acabamentos>)
 
   constructor(private _acabamentoService: AcabamentosService) {
     super();
@@ -89,6 +89,7 @@ export class AcabamentosChipsComponent extends BaseClass implements OnInit {
     // Add our fruit
     if (value) {
       this.listaAcabamentosAtual.push(value);
+      this.listaAcabamentosAtualChange.emit(this.listaAcabamentosAtual)
     }
 
     // Clear the input value

@@ -9,7 +9,7 @@ export class OrdemDeServico {
     id?:number;
     createdAt?:Date;
     empresa?:Cliente;
-    material?: string;
+    material: string="";
     papel?:Papel;
     cor_frente?: string;
     cor_verso?: string;
@@ -17,7 +17,7 @@ export class OrdemDeServico {
     quantidade_folhas?:number;
     numeracao_ini?:number;
     numeracao_final?:number;
-    observacao?: string;
+    observacao: string = "";
     listaAcabamentos?: Acabamentos;
 
 
